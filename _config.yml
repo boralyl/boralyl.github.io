@@ -17,6 +17,7 @@ title: Automate The Things
 email:
 description: >- # this means to ignore newlines until "baseurl:"
   Software engineer and home automation enthusiast.
+url: "https://aarongodfrey.dev"
 github_username: boralyl
 minimal_mistakes_skin: air
 search: true
