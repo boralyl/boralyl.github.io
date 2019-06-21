@@ -55,19 +55,25 @@ plugins:
   - jekyll-include-cache
 
 author:
-  name   : "First Lastname"
+  name   : "Aaron Godfrey"
   avatar : "/assets/images/bio-photo.jpg"
   bio    : "Software Engineer and Home Automation Enthusiast."
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/boralyl"
+    - label: "Linkedin"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/aaron-godfrey-8a4b197/"
 
 footer:
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/boralyl"
+    - label: "Linkedin"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/aaron-godfrey-8a4b197/"
 
 defaults:
   # _posts
