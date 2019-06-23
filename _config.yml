@@ -20,6 +20,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 url: "https://aarongodfrey.dev"
 github_username: boralyl
 minimal_mistakes_skin: air
+locale: en-US
 search: true
 
 # Build settings
