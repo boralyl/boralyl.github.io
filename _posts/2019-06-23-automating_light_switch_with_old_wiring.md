@@ -1,13 +1,13 @@
 ---
 title: Automating A Light Switch With Old Wiring
 excerpt: >
-  Walking through how my home assistant floorplan came to fruition and the
-  cool things that it does.
+  How to automate a light switch with old wiring and a non-standard light bulb.
 categories:
   - home automation
 tags:
   - homeassistant
   - home automation
+  - lighting
 ---
 
 One of the things that had been eluding me, in terms of automation, was my front
