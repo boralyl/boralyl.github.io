@@ -63,7 +63,7 @@ cards:
   - type: picture-elements
     image: /local/first_floor_lights_on.png
     elements:
-      
+
       # Lighting Overlays
       - type: image
         entity: light.kitchen
@@ -103,6 +103,9 @@ A few things to note about the above example:
   has the lights on.
 * Note the `style` attributes for the lighting overlay.  These values will be the
   same for each overlay image.
+* Ensure that you put all of your lighting overlays at the top of your view.  All
+  of the toggles should be below your overlays.  If you do not do this, then you
+  will not be able to click on any of your toggles.  So the order matters.
 
 In order to accurately place the transparent square over top of the portion of
 the image you want to click on you will need to set it's position in the `style`
@@ -171,7 +174,7 @@ cards:
           - entity: input_select.floorplan_floor
             state: "1st Floor"
         card: !include _floorplan_first_floor.yaml
-      
+
       - type: conditional
         conditions:
           - entity: input_select.floorplan_floor
@@ -191,7 +194,7 @@ floors when the button is clicked.
 type: picture-elements
 image: /local/floorplan/first_floor_lights_on.png
 elements:
-  
+
   # Lighting Overlays...
 
   # Light Toggles...
