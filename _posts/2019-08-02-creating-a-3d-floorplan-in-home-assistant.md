@@ -9,6 +9,7 @@ tags:
   - homeassistant
   - sweethome3d
   - home automation
+toc: true
 ---
 
 If you haven't created your floorplan image yet, I'd reccomend you take a look
@@ -342,7 +343,7 @@ switch:
         command_on: "ssh -o ConnectTimeout=2 root@19x.xxx.x.xxx -i /config/my.key -o StrictHostKeyChecking=no 'echo on 0 | cec-client -s -d 1'"
         command_off: "ssh -o ConnectTimeout=2 root@19x.xxx.x.xxx -i /config/my.key -o StrictHostKeyChecking=no 'echo standby 0 | cec-client -s -d 1'"
         command_state: "tvstatus() { local RESULTS; RESULTS=$(ssh -o ConnectTimeout=2 root@19x.xxx.x.xxx -i /config/my.key -o StrictHostKeyChecking=no \"echo pow 0 | cec-client -s -d 1 | grep -q 'power status: on'\"); echo $?; }; tvstatus"
-        value_template: '{{ value == "0" }}'
+        value_template: {% raw %}'{{ value == "0" }}'{% endraw %}
         friendly_name: Downstairs TV
 ```
 

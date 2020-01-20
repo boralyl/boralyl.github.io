@@ -14,6 +14,7 @@ header:
   image: /assets/images/0004_header.png
   image_description: SweetHome3D UI.
   caption: SweetHome3D UI.
+toc: true
 ---
 
 In a [previous post](https://aarongodfrey.dev/home%20automation/floorplan-in-home-assistant/)
