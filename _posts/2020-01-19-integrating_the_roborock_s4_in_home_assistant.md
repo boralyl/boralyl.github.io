@@ -23,7 +23,7 @@ classes: wide
 posted.</p>
 <ul>
   <li>Part 1 - Integrating the Roborock S4 in Home Assistant (reading now!)</li>
-  <li>Part 2 - Vacuum Automations and Scripts (coming soon)</li>
+  <li><a hef="https://aarongodfrey.dev/home%20automation/roborock_s4_home_assistant_automations/">Part 2 - Vacuum Automations and Scripts</a></li>
   <li>Part 3 - Vacuum Lovelace Dashboard (coming soon)</li>
 </ul>
 </div>
