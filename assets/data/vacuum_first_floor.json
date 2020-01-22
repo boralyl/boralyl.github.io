@@ -1,0 +1,96 @@
+[
+  {
+      "id": "bea99927.c30478",
+      "type": "mqtt in",
+      "z": "a063c33b.541fc8",
+      "name": "/nodered/vacuum_first_floor",
+      "topic": "/nodered/vacuum_first_floor",
+      "qos": "2",
+      "datatype": "auto",
+      "broker": "6c36660e.ccc708",
+      "x": 140,
+      "y": 700,
+      "wires": [
+          [
+              "753c9116.6c1c6"
+          ]
+      ]
+  },
+  {
+      "id": "753c9116.6c1c6",
+      "type": "api-call-service",
+      "z": "a063c33b.541fc8",
+      "name": "Clean First Floor",
+      "server": "b454cc2c.3067b",
+      "service_domain": "xiaomi_miio",
+      "service": "vacuum_clean_zone",
+      "data": "{\"entity_id\":\"vacuum.roborock_s4\",\"repeats\":1,\"zone\":[[21700,33050,26200,37150],[21900,29100,25100,32950],[22050,24850,29850,29150],[27100,29950,29800,31400],[25950,28950,27400,33400]]}",
+      "mergecontext": "",
+      "output_location": "",
+      "output_location_type": "none",
+      "x": 380,
+      "y": 700,
+      "wires": [
+          [
+              "60ed8464.27903c"
+          ]
+      ]
+  },
+  {
+      "id": "60ed8464.27903c",
+      "type": "function",
+      "z": "a063c33b.541fc8",
+      "name": "Set global.guest_bedroom_vacuumed = false",
+      "func": "global.set('guest_bedroom_vacuumed', false);\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 670,
+      "y": 700,
+      "wires": [
+          []
+      ]
+  },
+  {
+      "id": "9f2cd3b1.fcbe38",
+      "type": "comment",
+      "z": "a063c33b.541fc8",
+      "name": "Vacuum First Floor Flow",
+      "info": "This flow is triggered via the front-end.  When\ntriggered it sends an mqtt message to the \n`/nodered/vacuum_first_floor` topic to trigger\nthis flow.",
+      "x": 130,
+      "y": 640,
+      "wires": []
+  },
+  {
+      "id": "6c36660e.ccc708",
+      "type": "mqtt-broker",
+      "z": "",
+      "name": "Mosquitto",
+      "broker": "localhost",
+      "port": "1883",
+      "clientid": "",
+      "usetls": false,
+      "compatmode": true,
+      "keepalive": "60",
+      "cleansession": true,
+      "birthTopic": "",
+      "birthQos": "0",
+      "birthPayload": "",
+      "closeTopic": "",
+      "closeQos": "0",
+      "closePayload": "",
+      "willTopic": "",
+      "willQos": "0",
+      "willPayload": ""
+  },
+  {
+      "id": "b454cc2c.3067b",
+      "type": "server",
+      "z": "",
+      "name": "Home Assistant",
+      "legacy": false,
+      "hassio": false,
+      "rejectUnauthorizedCerts": true,
+      "ha_boolean": "y|yes|true|on|home|open",
+      "connectionDelay": true
+  }
+]

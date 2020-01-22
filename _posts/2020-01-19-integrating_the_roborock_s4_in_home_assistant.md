@@ -19,7 +19,7 @@ classes: wide
 *Note: this post was written about the Roborock S4 but it should also work with the S5, S5 Max, S6 and S6 Pure.*
 {: .notice--warning}
 
-<div><p>This is a 3 part post on the vacuum.  I"ll update the links below as they are
+<div><p>This is part 1 of a 3 part post on the vacuum.  I"ll update the links below as they are
 posted.</p>
 <ul>
   <li>Part 1 - Integrating the Roborock S4 in Home Assistant (reading now!)</li>

@@ -1,0 +1,177 @@
+[
+  {
+      "id": "7a837850.8bb188",
+      "type": "trigger-state",
+      "z": "a063c33b.541fc8",
+      "name": "Vacuum Finished?",
+      "server": "b454cc2c.3067b",
+      "entityid": "vacuum.roborock_s4",
+      "entityidfiltertype": "exact",
+      "debugenabled": false,
+      "constraints": [
+          {
+              "id": "zvv383i13ro",
+              "targetType": "this_entity",
+              "targetValue": "",
+              "propertyType": "current_state",
+              "propertyValue": "new_state.state",
+              "comparatorType": "is",
+              "comparatorValueDatatype": "str",
+              "comparatorValue": "returning"
+          },
+          {
+              "id": "y0qimkpedh",
+              "targetType": "this_entity",
+              "targetValue": "",
+              "propertyType": "previous_state",
+              "propertyValue": "old_state.state",
+              "comparatorType": "is",
+              "comparatorValueDatatype": "str",
+              "comparatorValue": "cleaning"
+          }
+      ],
+      "constraintsmustmatch": "all",
+      "outputs": 2,
+      "customoutputs": [],
+      "outputinitially": false,
+      "state_type": "str",
+      "x": 110,
+      "y": 340,
+      "wires": [
+          [
+              "cbe31fc7.1052c8"
+          ],
+          []
+      ]
+  },
+  {
+      "id": "50b8d440.5204c4",
+      "type": "api-call-service",
+      "z": "a063c33b.541fc8",
+      "name": "Set Roborock Daily Run to True",
+      "server": "b454cc2c.3067b",
+      "service_domain": "input_boolean",
+      "service": "turn_on",
+      "data": "{\"entity_id\":\"input_boolean.roborock_daily_run\"}",
+      "mergecontext": "",
+      "output_location": "",
+      "output_location_type": "none",
+      "x": 670,
+      "y": 300,
+      "wires": [
+          []
+      ]
+  },
+  {
+      "id": "891cea48.7ea63",
+      "type": "inject",
+      "z": "a063c33b.541fc8",
+      "name": "Every Day at Midnight",
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "repeat": "",
+      "crontab": "00 00 * * *",
+      "once": false,
+      "onceDelay": 0.1,
+      "x": 150,
+      "y": 400,
+      "wires": [
+          [
+              "be6b600d.0c038"
+          ]
+      ]
+  },
+  {
+      "id": "be6b600d.0c038",
+      "type": "api-call-service",
+      "z": "a063c33b.541fc8",
+      "name": "Reset Roborock Daily Run",
+      "server": "b454cc2c.3067b",
+      "service_domain": "input_boolean",
+      "service": "turn_off",
+      "data": "{\"entity_id\":\"input_boolean.roborock_daily_run\"}",
+      "mergecontext": "",
+      "output_location": "",
+      "output_location_type": "none",
+      "x": 420,
+      "y": 420,
+      "wires": [
+          []
+      ]
+  },
+  {
+      "id": "15dbfa53.5e6da6",
+      "type": "comment",
+      "z": "a063c33b.541fc8",
+      "name": "Toggling Roborock Daily Run Boolean",
+      "info": "These automations manage the state of the\n`roborock_daily_run` input boolean.\n\n**Note:** The clean zone command can only do 5\nzones at a time.  Since we have 6, when it finishes\nthe 5th we check a global variable to see if we've\ncleaned the 6th yet (guest bedroom).  If not we\nclean it then set the daily run input boolean to true.",
+      "x": 170,
+      "y": 280,
+      "wires": []
+  },
+  {
+      "id": "cbe31fc7.1052c8",
+      "type": "function",
+      "z": "a063c33b.541fc8",
+      "name": "Guest Bedroom vacuumed?",
+      "func": "var ran = global.get(\"guest_bedroom_vacuumed\" || false);\nif (!ran) {\n    return [null, msg]\n} else {\n    return [msg, null];\n}",
+      "outputs": 2,
+      "noerr": 0,
+      "x": 380,
+      "y": 340,
+      "wires": [
+          [
+              "50b8d440.5204c4"
+          ],
+          [
+              "cfe6047.6bb7d78"
+          ]
+      ]
+  },
+  {
+      "id": "cfe6047.6bb7d78",
+      "type": "api-call-service",
+      "z": "a063c33b.541fc8",
+      "name": "Clean Guest Bedroom",
+      "server": "b454cc2c.3067b",
+      "service_domain": "xiaomi_miio",
+      "service": "vacuum_clean_zone",
+      "data": "{\"entity_id\":\"vacuum.roborock_s4\",\"repeats\":1,\"zone\":[[26200,32700,29600,35700]]}",
+      "mergecontext": "",
+      "output_location": "",
+      "output_location_type": "none",
+      "x": 640,
+      "y": 360,
+      "wires": [
+          [
+              "7ae2fd1.b3b4284"
+          ]
+      ]
+  },
+  {
+      "id": "7ae2fd1.b3b4284",
+      "type": "function",
+      "z": "a063c33b.541fc8",
+      "name": "Set global.guest_bedroom_vacuumed = true",
+      "func": "global.set('guest_bedroom_vacuumed', true);\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 1010,
+      "y": 360,
+      "wires": [
+          []
+      ]
+  },
+  {
+      "id": "b454cc2c.3067b",
+      "type": "server",
+      "z": "",
+      "name": "Home Assistant",
+      "legacy": false,
+      "hassio": false,
+      "rejectUnauthorizedCerts": true,
+      "ha_boolean": "y|yes|true|on|home|open",
+      "connectionDelay": true
+  }
+]

@@ -1,0 +1,125 @@
+[
+  {
+      "id": "85c4aa8.40b6558",
+      "type": "server-state-changed",
+      "z": "da9cfa9b.8929a8",
+      "name": "Arrived Home",
+      "server": "b454cc2c.3067b",
+      "entityidfilter": "group.all_people",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "home",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 2,
+      "output_only_on_state_change": true,
+      "x": 545,
+      "y": 1108,
+      "wires": [
+          [
+              "506985ef.1926bc"
+          ],
+          []
+      ]
+  },
+  {
+      "id": "506985ef.1926bc",
+      "type": "delay",
+      "z": "da9cfa9b.8929a8",
+      "name": "Delay 10 Minutes",
+      "pauseType": "delay",
+      "timeout": "10",
+      "timeoutUnits": "minutes",
+      "rate": "1",
+      "nbRateUnits": "1",
+      "rateUnits": "second",
+      "randomFirst": "1",
+      "randomLast": "5",
+      "randomUnits": "seconds",
+      "drop": false,
+      "x": 730,
+      "y": 1020,
+      "wires": [
+          [
+              "232ab39b.549e94"
+          ]
+      ]
+  },
+  {
+      "id": "232ab39b.549e94",
+      "type": "api-current-state",
+      "z": "da9cfa9b.8929a8",
+      "name": "Dustbin Needs Emptied?",
+      "server": "b454cc2c.3067b",
+      "outputs": 2,
+      "halt_if": "off",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "override_topic": false,
+      "entity_id": "input_boolean.roborock_empty_dustbin",
+      "state_type": "str",
+      "state_location": "payload",
+      "override_payload": "msg",
+      "entity_location": "data",
+      "override_data": "msg",
+      "x": 950,
+      "y": 1020,
+      "wires": [
+          [],
+          [
+              "24c221ee.05172e"
+          ]
+      ]
+  },
+  {
+      "id": "24c221ee.05172e",
+      "type": "api-call-service",
+      "z": "da9cfa9b.8929a8",
+      "name": "Send Empty Dustbin Notification",
+      "server": "b454cc2c.3067b",
+      "service_domain": "notify",
+      "service": "godfrey",
+      "data": "{\"title\":\"Vacuum Dustbin\",\"message\":\"Have you emptied the dustbin today?\"}",
+      "mergecontext": "",
+      "output_location": "",
+      "output_location_type": "none",
+      "x": 1210,
+      "y": 1020,
+      "wires": [
+          [
+              "fecd70ae.92a4f"
+          ]
+      ]
+  },
+  {
+      "id": "fecd70ae.92a4f",
+      "type": "api-call-service",
+      "z": "da9cfa9b.8929a8",
+      "name": "Set Dustbin Emptied",
+      "server": "b454cc2c.3067b",
+      "service_domain": "input_boolean",
+      "service": "turn_on",
+      "data": "{\"entity_id\":\"input_boolean.roborock_empty_dustbin\"}",
+      "mergecontext": "",
+      "output_location": "",
+      "output_location_type": "none",
+      "x": 1460,
+      "y": 1020,
+      "wires": [
+          []
+      ],
+      "info": "Marks the vacuum dustbin input boolean as being\nemptied."
+  },
+  {
+      "id": "b454cc2c.3067b",
+      "type": "server",
+      "z": "",
+      "name": "Home Assistant",
+      "legacy": false,
+      "hassio": false,
+      "rejectUnauthorizedCerts": true,
+      "ha_boolean": "y|yes|true|on|home|open",
+      "connectionDelay": true
+  }
+]

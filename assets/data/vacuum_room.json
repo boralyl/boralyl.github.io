@@ -1,0 +1,112 @@
+[
+  {
+      "id": "a2ceb71f.bbf83",
+      "type": "mqtt in",
+      "z": "a063c33b.541fc8",
+      "name": "/nodered/vacuum_room",
+      "topic": "/nodered/vacuum_room",
+      "qos": "2",
+      "datatype": "auto",
+      "broker": "6c36660e.ccc708",
+      "x": 120,
+      "y": 560,
+      "wires": [
+          [
+              "6ec44c12.f427bc"
+          ]
+      ]
+  },
+  {
+      "id": "6ec44c12.f427bc",
+      "type": "json",
+      "z": "a063c33b.541fc8",
+      "name": "Parse JSON",
+      "property": "payload",
+      "action": "",
+      "pretty": false,
+      "x": 330,
+      "y": 560,
+      "wires": [
+          [
+              "2f08dd7b.b16962"
+          ]
+      ]
+  },
+  {
+      "id": "2f08dd7b.b16962",
+      "type": "function",
+      "z": "a063c33b.541fc8",
+      "name": "Set Vacuum Payload",
+      "func": "msg.payload.domain = 'xiaomi_miio';\nmsg.payload.service = 'vacuum_clean_zone';\nvar serviceData = {\n    entity_id: 'vacuum.roborock_s4',\n    repeats: msg.payload.repeat\n}\nswitch(msg.payload.room) {\n    case 'Bathroom':\n        serviceData.zone = [[27100,29950,29800,31400]];\n        break;\n    case 'Dining Room':\n        serviceData.zone = [[21900,29100,25100,32950]];\n        break;\n    case 'Guest Bedroom':\n        serviceData.zone = [[26200,32700,29600,35700]];\n        break;\n    case 'Hallway':\n        serviceData.zone = [[25950,28950,27400,33400]];\n        break;\n    case 'Kitchen':\n        serviceData.zone = [[21700,33050,26200,37150]];\n        break;\n    case 'Living Room':\n        serviceData.zone = [[22050,24850,29850,29150]];\n        break;\n}\nmsg.payload.data = serviceData;\n\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 540,
+      "y": 560,
+      "wires": [
+          [
+              "e97d673d.cf1d6"
+          ]
+      ]
+  },
+  {
+      "id": "e97d673d.cf1d6",
+      "type": "api-call-service",
+      "z": "a063c33b.541fc8",
+      "name": "Vacuum Room",
+      "server": "b454cc2c.3067b",
+      "service_domain": "",
+      "service": "",
+      "data": "",
+      "mergecontext": "",
+      "output_location": "",
+      "output_location_type": "none",
+      "x": 760,
+      "y": 560,
+      "wires": [
+          []
+      ]
+  },
+  {
+      "id": "1691f2ef.0330c5",
+      "type": "comment",
+      "z": "a063c33b.541fc8",
+      "name": "Vacuum Room Flow",
+      "info": "This flow is triggered via the front-end.  When\na room and repeats is selected it sends an mqtt\nmessage to the `/nodered/vacuum_room` topic to\ntrigger this flow.",
+      "x": 110,
+      "y": 500,
+      "wires": []
+  },
+  {
+      "id": "6c36660e.ccc708",
+      "type": "mqtt-broker",
+      "z": "",
+      "name": "Mosquitto",
+      "broker": "localhost",
+      "port": "1883",
+      "clientid": "",
+      "usetls": false,
+      "compatmode": true,
+      "keepalive": "60",
+      "cleansession": true,
+      "birthTopic": "",
+      "birthQos": "0",
+      "birthPayload": "",
+      "closeTopic": "",
+      "closeQos": "0",
+      "closePayload": "",
+      "willTopic": "",
+      "willQos": "0",
+      "willPayload": ""
+  },
+  {
+      "id": "b454cc2c.3067b",
+      "type": "server",
+      "z": "",
+      "name": "Home Assistant",
+      "legacy": false,
+      "hassio": false,
+      "rejectUnauthorizedCerts": true,
+      "ha_boolean": "y|yes|true|on|home|open",
+      "connectionDelay": true
+  }
+]

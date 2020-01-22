@@ -1,0 +1,221 @@
+[
+  {
+      "id": "79f4a472.bc05dc",
+      "type": "api-current-state",
+      "z": "a063c33b.541fc8",
+      "name": "Roborock Already Run Today?",
+      "server": "b454cc2c.3067b",
+      "outputs": 2,
+      "halt_if": "off",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "override_topic": false,
+      "entity_id": "input_boolean.roborock_daily_run",
+      "state_type": "str",
+      "state_location": "payload",
+      "override_payload": "msg",
+      "entity_location": "data",
+      "override_data": "msg",
+      "x": 390,
+      "y": 120,
+      "wires": [
+          [],
+          [
+              "85dbebf1.13e7d8"
+          ]
+      ]
+  },
+  {
+      "id": "8ea8cb86.c3768",
+      "type": "inject",
+      "z": "a063c33b.541fc8",
+      "name": "Manually Trigger",
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "repeat": "",
+      "crontab": "",
+      "once": false,
+      "onceDelay": 0.1,
+      "x": 120,
+      "y": 100,
+      "wires": [
+          [
+              "79f4a472.bc05dc"
+          ]
+      ]
+  },
+  {
+      "id": "dd80cead.297",
+      "type": "api-call-service",
+      "z": "a063c33b.541fc8",
+      "name": "Clean First Floor",
+      "server": "b454cc2c.3067b",
+      "service_domain": "xiaomi_miio",
+      "service": "vacuum_clean_zone",
+      "data": "{\"entity_id\":\"vacuum.roborock_s4\",\"repeats\":1,\"zone\":[[21700,33050,26200,37150],[21900,29100,25100,32950],[22050,24850,29850,29150],[27100,29950,29800,31400],[25950,28950,27400,33400]]}",
+      "mergecontext": "",
+      "output_location": "",
+      "output_location_type": "none",
+      "x": 900,
+      "y": 120,
+      "wires": [
+          [
+              "30a40a09.01b4ae"
+          ]
+      ]
+  },
+  {
+      "id": "c09ee23b.2a515",
+      "type": "api-current-state",
+      "z": "a063c33b.541fc8",
+      "name": "Roborock Running?",
+      "server": "b454cc2c.3067b",
+      "outputs": 2,
+      "halt_if": "cleaning",
+      "halt_if_type": "str",
+      "halt_if_compare": "is_not",
+      "override_topic": false,
+      "entity_id": "vacuum.roborock_s4",
+      "state_type": "str",
+      "state_location": "payload",
+      "override_payload": "msg",
+      "entity_location": "data",
+      "override_data": "msg",
+      "x": 700,
+      "y": 120,
+      "wires": [
+          [],
+          [
+              "dd80cead.297"
+          ]
+      ]
+  },
+  {
+      "id": "29577914.c8da76",
+      "type": "trigger-state",
+      "z": "a063c33b.541fc8",
+      "name": "Everyone Away?",
+      "server": "b454cc2c.3067b",
+      "entityid": "group.all_people",
+      "entityidfiltertype": "exact",
+      "debugenabled": false,
+      "constraints": [
+          {
+              "id": "j0ob9uldbc",
+              "targetType": "this_entity",
+              "targetValue": "",
+              "propertyType": "current_state",
+              "propertyValue": "new_state.state",
+              "comparatorType": "is",
+              "comparatorValueDatatype": "str",
+              "comparatorValue": "not_home"
+          },
+          {
+              "id": "7d6k4kkns33",
+              "targetType": "this_entity",
+              "targetValue": "",
+              "propertyType": "previous_state",
+              "propertyValue": "old_state.state",
+              "comparatorType": "is",
+              "comparatorValueDatatype": "str",
+              "comparatorValue": "home"
+          }
+      ],
+      "constraintsmustmatch": "all",
+      "outputs": 2,
+      "customoutputs": [],
+      "outputinitially": false,
+      "state_type": "str",
+      "x": 130,
+      "y": 160,
+      "wires": [
+          [
+              "79f4a472.bc05dc"
+          ],
+          []
+      ]
+  },
+  {
+      "id": "19238fd4.379088",
+      "type": "inject",
+      "z": "a063c33b.541fc8",
+      "name": "Every Day at 2PM",
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "repeat": "",
+      "crontab": "00 14 * * *",
+      "once": false,
+      "onceDelay": 0.1,
+      "x": 130,
+      "y": 220,
+      "wires": [
+          [
+              "79f4a472.bc05dc"
+          ]
+      ]
+  },
+  {
+      "id": "e1c9f745.3c2368",
+      "type": "comment",
+      "z": "a063c33b.541fc8",
+      "name": "Auto Run Vacuum Automation",
+      "info": "This automation can be triggered in 1 of 3 ways:\n\n * Manually invoked by hitting the inject node.\n * When no one is home if it has not run today and is not currently cleaning.\n * If at 2PM someone is still home and it hasn't run today.",
+      "x": 140,
+      "y": 40,
+      "wires": []
+  },
+  {
+      "id": "30a40a09.01b4ae",
+      "type": "function",
+      "z": "a063c33b.541fc8",
+      "name": "Set global.guest_bedroom_vacuumed = false",
+      "func": "global.set('guest_bedroom_vacuumed', false);\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 1170,
+      "y": 120,
+      "wires": [
+          []
+      ]
+  },
+  {
+      "id": "85dbebf1.13e7d8",
+      "type": "api-current-state",
+      "z": "a063c33b.541fc8",
+      "name": "Vacation Mode Enabled?",
+      "server": "b454cc2c.3067b",
+      "outputs": 2,
+      "halt_if": "off",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "override_topic": false,
+      "entity_id": "input_boolean.vacation_mode",
+      "state_type": "str",
+      "state_location": "payload",
+      "override_payload": "msg",
+      "entity_location": "data",
+      "override_data": "msg",
+      "x": 590,
+      "y": 60,
+      "wires": [
+          [],
+          [
+              "c09ee23b.2a515"
+          ]
+      ],
+      "info": "Short circuit this flow if vacation mode is enabled."
+  },
+  {
+      "id": "b454cc2c.3067b",
+      "type": "server",
+      "z": "",
+      "name": "Home Assistant",
+      "legacy": false,
+      "hassio": false,
+      "rejectUnauthorizedCerts": true,
+      "ha_boolean": "y|yes|true|on|home|open",
+      "connectionDelay": true
+  }
+]

@@ -1,0 +1,136 @@
+[
+  {
+      "id": "475e2a06.f520cc",
+      "type": "comment",
+      "z": "a063c33b.541fc8",
+      "name": "Maintenance Notifications Flows",
+      "info": "These flows send notifications when filters need\nto be replaced or sensors need to be cleaned.",
+      "x": 150,
+      "y": 900,
+      "wires": []
+  },
+  {
+      "id": "a213d31d.882008",
+      "type": "server-state-changed",
+      "z": "a063c33b.541fc8",
+      "name": "Vacuum State Change",
+      "server": "b454cc2c.3067b",
+      "entityidfilter": "vacuum.roborock_s4",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 1,
+      "output_only_on_state_change": true,
+      "x": 120,
+      "y": 1020,
+      "wires": [
+          [
+              "fbee94e4.7da4f8",
+              "c4b0c5ac.895fd8",
+              "48327638.a8d638",
+              "49e7106c.01ca08"
+          ]
+      ]
+  },
+  {
+      "id": "fbee94e4.7da4f8",
+      "type": "function",
+      "z": "a063c33b.541fc8",
+      "name": "Check Filter",
+      "func": "var hoursLeft = msg.data.new_state.attributes.filter_left;\nif (hoursLeft <= 10) {\n    msg.payload = {\n        data: {\n            \"title\": \"Vacuum Maintenance Alert\",\n            \"message\": \"It's time to order replacement parts for your filter.  There are only \" + hoursLeft + \"hrs remaining.\"\n        }\n    }\n    return [msg, null]\n}\nreturn [null, msg]",
+      "outputs": 2,
+      "noerr": 0,
+      "x": 330,
+      "y": 960,
+      "wires": [
+          [
+              "474852de.6145dc"
+          ],
+          []
+      ]
+  },
+  {
+      "id": "c4b0c5ac.895fd8",
+      "type": "function",
+      "z": "a063c33b.541fc8",
+      "name": "Check Side Brush",
+      "func": "var hoursLeft = msg.data.new_state.attributes.side_brush_left;\nif (hoursLeft <= 10) {\n    msg.payload = {\n        data: {\n            \"title\": \"Vacuum Maintenance Alert\",\n            \"message\": \"It's time to order replacement parts for your side brush.  There are only \" + hoursLeft + \"hrs remaining.\"\n        }\n    }\n    return [msg, null]\n}\nreturn [null, msg]",
+      "outputs": 2,
+      "noerr": 0,
+      "x": 350,
+      "y": 1000,
+      "wires": [
+          [
+              "474852de.6145dc"
+          ],
+          []
+      ],
+      "info": "Sets the msg payload if needed."
+  },
+  {
+      "id": "48327638.a8d638",
+      "type": "function",
+      "z": "a063c33b.541fc8",
+      "name": "Check Main Brush",
+      "func": "var hoursLeft = msg.data.new_state.attributes.main_brush_left;\nif (hoursLeft <= 10) {\n    msg.payload = {\n        data: {\n            \"title\": \"Vacuum Maintenance Alert\",\n            \"message\": \"It's time to order replacement parts for your main brush.  There are only \" + hoursLeft + \"hrs remaining.\"\n        }\n    }\n    return [msg, null]\n}\nreturn [null, msg]",
+      "outputs": 2,
+      "noerr": 0,
+      "x": 350,
+      "y": 1040,
+      "wires": [
+          [
+              "474852de.6145dc"
+          ],
+          []
+      ]
+  },
+  {
+      "id": "49e7106c.01ca08",
+      "type": "function",
+      "z": "a063c33b.541fc8",
+      "name": "Check Sensors",
+      "func": "var hoursLeft = msg.data.new_state.attributes.sensor_dirty_left;\nif (hoursLeft <= 2) {\n    msg.payload = {\n        data: {\n            \"title\": \"Vacuum Maintenance Alert\",\n            \"message\": \"It's time to clean the vacuum sensors.  There are 4 cliff sensors on the bottom front and 1 wall sensor on the left of the robot.  There are only \" + hoursLeft + \"hrs remaining.\"\n        }\n    }\n    return [msg, null]\n}\nreturn [null, msg]",
+      "outputs": 2,
+      "noerr": 0,
+      "x": 340,
+      "y": 1080,
+      "wires": [
+          [
+              "474852de.6145dc"
+          ],
+          []
+      ]
+  },
+  {
+      "id": "474852de.6145dc",
+      "type": "api-call-service",
+      "z": "a063c33b.541fc8",
+      "name": "Notify Godfrey",
+      "server": "b454cc2c.3067b",
+      "service_domain": "notify",
+      "service": "godfrey",
+      "data": "",
+      "mergecontext": "",
+      "output_location": "",
+      "output_location_type": "none",
+      "x": 600,
+      "y": 1020,
+      "wires": [
+          []
+      ]
+  },
+  {
+      "id": "b454cc2c.3067b",
+      "type": "server",
+      "z": "",
+      "name": "Home Assistant",
+      "legacy": false,
+      "hassio": false,
+      "rejectUnauthorizedCerts": true,
+      "ha_boolean": "y|yes|true|on|home|open",
+      "connectionDelay": true
+  }
+]

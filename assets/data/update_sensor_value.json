@@ -1,0 +1,61 @@
+[
+  {
+      "id": "2ab0e08.3caec2",
+      "type": "comment",
+      "z": "a063c33b.541fc8",
+      "name": "Update roborock_s4_last_cleaned sensor value Flow",
+      "info": "These flow updates the `roborock_s4_last_cleaned`\nsensor value every 5 minutes.  This is required\nbecause the `value_template` does a relative time\ncalculation to populate the value.  Since the\ncalculation it's done on is calculated from now and\na date of a state attribute it normally only gets\nupdated when the state attribute is updated which\nis typically once a day.  Now it will update it\nevery 5 minutes so that the relative time is\nmostly up to date.",
+      "x": 210,
+      "y": 780,
+      "wires": []
+  },
+  {
+      "id": "249228ca.5db3b8",
+      "type": "inject",
+      "z": "a063c33b.541fc8",
+      "name": "Every 5 Minutes",
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "repeat": "300",
+      "crontab": "",
+      "once": false,
+      "onceDelay": 0.1,
+      "x": 130,
+      "y": 840,
+      "wires": [
+          [
+              "c821734.92f8b1"
+          ]
+      ]
+  },
+  {
+      "id": "c821734.92f8b1",
+      "type": "api-call-service",
+      "z": "a063c33b.541fc8",
+      "name": "Update sensor.roborock_s4_last_cleaned",
+      "server": "b454cc2c.3067b",
+      "service_domain": "homeassistant",
+      "service": "update_entity",
+      "data": "{\"entity_id\":\"sensor.roborock_s4_last_cleaned\"}",
+      "mergecontext": "",
+      "output_location": "",
+      "output_location_type": "none",
+      "x": 420,
+      "y": 840,
+      "wires": [
+          []
+      ]
+  },
+  {
+      "id": "b454cc2c.3067b",
+      "type": "server",
+      "z": "",
+      "name": "Home Assistant",
+      "legacy": false,
+      "hassio": false,
+      "rejectUnauthorizedCerts": true,
+      "ha_boolean": "y|yes|true|on|home|open",
+      "connectionDelay": true
+  }
+]
