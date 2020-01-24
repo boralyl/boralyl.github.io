@@ -10,6 +10,7 @@ tags:
   - homeassistant
   - home automation
   - roborock
+  - lovelace
 header:
   image: /assets/images/0008_header.png
   image_description: Node-RED Flow
@@ -23,8 +24,8 @@ toc: true
 posted.</p>
 <ul>
   <li><a href="https://aarongodfrey.dev/home%20automation/integrating_the_roborock_s4_in_home_assistant/">Part 1 - Integrating the Roborock S4 in Home Assistant</a></li>
-  <li>Part 2 - Vacuum Automations and Scripts (Reading Now!)</li>
-  <li>Part 3 - Vacuum Lovelace Dashboard (coming soon)</li>
+  <li>Part 2 - Roborock S4 Automations and Scripts in Home Assistant (Reading Now!)</li>
+  <li>Part 3 - Roborock S4 Lovelace Dashboard (coming soon)</li>
 </ul>
 </div>
 {: .notice--info}
