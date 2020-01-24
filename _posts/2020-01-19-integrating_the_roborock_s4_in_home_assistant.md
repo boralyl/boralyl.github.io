@@ -24,7 +24,7 @@ posted.</p>
 <ul>
   <li>Part 1 - Integrating the Roborock S4 in Home Assistant (reading now!)</li>
   <li><a href="https://aarongodfrey.dev/home%20automation/roborock_s4_home_assistant_automations/">Part 2 - Roborock S4 Automations and Scripts in Home Assistant</a></li>
-  <li>Part 3 - Roborock S4 Lovelace Dashboard (coming soon)</li>
+  <li><a href="https://aarongodfrey.dev/home%20automation/roborock_s4_lovelace_dashboard/">Part 3 - Roborock S4 Lovelace Dashboard</a></li>
 </ul>
 </div>
 {: .notice--info}
