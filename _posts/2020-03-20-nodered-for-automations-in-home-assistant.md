@@ -1,8 +1,8 @@
 ---
 title: "Node-RED for Automations in Home Assistant"
 excerpt: >
-  This post explains why I've chose Node-RED to power my automations in home-assistant.
-  I explain the advantages it has over the builtin yaml automations and how to
+  This post explains why I've chosen Node-RED to power my automations in home-assistant.
+  I explain the advantages it has over the built-in yaml automations and how to
   accomplish some common tasks which aren't very obvious when you are just
   getting started with Node-RED.
 categories:
