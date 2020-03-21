@@ -99,7 +99,7 @@ Juan over at [JuanMTech](https://www.juanmtech.com/) has a [fantastic guide alon
 with a video tutorial](https://www.juanmtech.com/get-started-with-node-red-and-home-assistant/)
 that is kept up to date.
 
-The [node-red-contrib-home-assistant-websocket](https://zachowj.github.io/node-red-contrib-home-assistant-websocket/)
+The [y](https://zachowj.github.io/node-red-contrib-home-assistant-websocket/)
 palatte that is used to interact with Home Assistant not only has detailed
 documentation on the nodes it provides, but also has a basic tutorial and some
 cookbook recipes to inspire you.
@@ -312,6 +312,18 @@ return msg;
 Here is an example of what you would see in your flow:
 
 [![Function Node Status](/assets/images/0010_function_status.png)](/assets/images/0010_function_status.png)
+
+### About Entity Auto-Completion
+
+[![Entity Auto-Complete](/assets/images/0010_autocomplete.png)](/assets/images/0010_autocomplete.png)
+
+Another really useful feature of of the `node-red-contrib-home-assistant-websocket`
+palatte is that it will auto-complete your entity names when you begin typing.
+There is a caveat to this though.  If you add an entity while Node-RED is running
+it will not show up in the auto-complete dropdown.  It will still work if you
+manually type it in, however.  In order to get the newly added entities to show
+up, you will need to restart Node-RED.  This confused me when I was first getting
+started, so I wanted to call attention to it.
 
 ## Wrap Up
 
