@@ -88,6 +88,41 @@ integration.  If we happen to be watching TV we'll see exactly who is at the doo
 before they get a chance to knock.  A push notification with the image attached is
 also sent to our phones in the event no one is home or we aren't watching TV.
 
+The Unifi camera entity is added using the [unifiprotect custom component](https://github.com/briis/unifiprotect).
+When the motion sensor triggers a motion event, I set a 2 second timer since it tends
+to trigger before anyone is fully on the porch.  This allows the snapshot image to
+be more useful.  To get the snapshot I use the [`camera.snapshot`](https://www.home-assistant.io/integrations/camera#service-snapshot) service and specify the `filename` service data attirbute
+as a file in my local www directory (e.g. `filename: /config/www/snapshot.jpg`).
+This will get overwitten everytime there is a new motion event, but that's not a problem
+since it's only used once to send the notifcations to our phones and TV.  Finally
+the notification is sent using the [`notify`](https://www.home-assistant.io/integrations/notify)
+integration in conjunction with the entity added by the [`mobile_app`](https://www.home-assistant.io/integrations/mobile_app) integration.
+
+The service data for Android for the notification is:
+
+```yaml
+message: "Motion Detected on the Front Porch"
+data:
+   image: "http://10.1.1.1:8123/local/snapshot.jpg",
+   stream_source: "camera.uvc_g3_flex_aa16"
+```
+
+The service data for iOS is slightly different:
+
+```yaml
+message: Motion Detected on the Front Porch
+data:
+  attachment:
+    url: http://10.1.1.1:8123/local/snapshot.jpg
+    content-type: jpg
+    hide-thumbnail: false
+  entity_id: camera.uvc_g3_flex_aa16
+  push:
+    category: camera
+```
+
+Tapping on the push notification will launch a RTSP stream for the camera.
+
 ## Circadian Lighting
 
 I'll quote the [custom component](https://github.com/claytonjn/hass-circadian_lighting)'s
