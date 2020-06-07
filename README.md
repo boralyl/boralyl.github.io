@@ -30,7 +30,7 @@ $ bundle exec jekyll serve --incremental --drafts --watch --future
 
 ## Updating Gems and Theme
 
-```
+```bash
 $ bundle update
 ```
 ````
