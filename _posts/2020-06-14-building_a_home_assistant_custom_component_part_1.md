@@ -46,6 +46,9 @@ Each post will be a different branch in a [GitHub repository](https://github.com
 own editor, or browse the code for each post by looking at the appropriate branch.
 The changes added in this part can be viewed on the [feature/part1 branch](https://github.com/boralyl/github-custom-component-tutorial/compare/feature/bare-repo...feature/part1?expand=1).
 
+I'd suggest checking out the official [developer documentation](https://developers.home-assistant.io/)
+to give yourself a better idea of all of the concepts in the Home Assistant architechture.
+
 ## Project Structure
 
 To get started we need to generate the basic files for our custom component.
