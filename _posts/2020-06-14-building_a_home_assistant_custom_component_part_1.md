@@ -22,7 +22,7 @@ toc: true
   <p>This is the first part of a multi-part tutorial to create a Home Assistant custom component.</p>
   <ul>
     <li>Part 1 - Project Structure and Basics (Reading Now!)</li>
-    <li>Part 2 - Unit Testing and Continuous Integration (Coming Soon...)</li>
+    <li><a href="https://aarongodfrey.dev/home%20automation/building_a_home_assistant_custom_component_part_2/">Part 2 - Unit Testing and Continuous Integration</a></li>
   </ul>
 </div>
 {: .notice--info}
