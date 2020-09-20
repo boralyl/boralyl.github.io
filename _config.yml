@@ -25,7 +25,7 @@ search: true
 
 # Build settings
 markdown: kramdown
-remote_theme: "mmistakes/jekyll-theme-basically-basic"
+remote_theme: "mmistakes/minimal-mistakes@4.20.2"
 # Outputting
 permalink: /:categories/:title/
 paginate: 5 # amount of posts to show
@@ -83,7 +83,7 @@ defaults:
       path: ""
       type: posts
     values:
-      layout: post
+      layout: single
       author_profile: true
       read_time: true
       comments: true
@@ -93,7 +93,7 @@ defaults:
       path: "_pages"
       type: pages
     values:
-      layout: post
+      layout: single
       author_profile: true
 
 category_archive:
