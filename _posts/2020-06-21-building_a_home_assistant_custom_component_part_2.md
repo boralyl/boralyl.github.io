@@ -198,10 +198,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python {% raw %}${{ matrix.python-version }}{% endraw %}
         uses: actions/setup-python@v1
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
 
       - name: Set PY env
         run: echo "::set-env name=PY::$(python -VV | sha256sum | cut -d' ' -f1)"
