@@ -48,8 +48,8 @@ Home Assistant has a bunch of great test utilities and [pytest fixtures](https:/
 that make writing unit tests in the [core repo](https://github.com/home-assistant/core)
 much simpler (like having access to a `hass` instance), but they are not exposed
 anywhere that you can import them without copy/pasting the code. To make this
-reusable for custom components, I created
-a [pytest plugin](https://github.com/boralyl/pytest-homeassistant) that will
+reusable for custom components, you can install a
+[pytest plugin](https://github.com/MatthewFlamm/pytest-homeassistant-custom-component) that will
 provide that functionality.
 
 If you created your component using the
@@ -58,10 +58,10 @@ for Home Assistant, than that requirement already exists in your `requirements.t
 If you have an existing component you can install it using pip.
 
 ```bash
-$ pip install pytest-homeassistant
+$ pip install pytest-homeassistant-custom-component
 ```
 
-You don't need to do anything else to access the pytest fixtures that the `pytest-homeassistant`
+You don't need to do anything else to access the pytest fixtures that the `pytest-homeassistant-custom-component`
 plugin provides. pytest will automatically know about them and you can start
 using them in your tests. One of the most useful is `hass` for providing a `hass`
 instance that is properly setup for your test environment. This is especially
@@ -80,19 +80,19 @@ async def test_flow_user_step_no_input(hass):
 ```
 
 When pytest sees an argument to your test function it will look it up based on
-the name and all plugins registered. Since `pytest-homeassistant` registers this,
+the name and all plugins registered. Since `pytest-homeassistant-custom-component` registers this,
 it will initialize it appropriately when the test function is called. We now
 have the ability to run the different steps in the config flow with varying values
 and make assertions about the data that is returned. In this particular case
 we are testing that we display the appropriate error if the user did not provide
 any input when configuring the component during the config flow process.
 
-Another useful util from Home Assistant that `pytest-homeassistant` provides is
+Another useful util from Home Assistant that `pytest-homeassistant-custom-component` provides is
 the `AsyncMock` for mocking return values of async functions. In this example
 we are mocking the `github.getitem` async function to raise an exception.
 
 ```python
-from pytest_homeassistant.async_mock import AsyncMock, MagicMock
+from pytest_homeassistant_custom_component.async_mock import AsyncMock, MagicMock
 
 from custom_components.github_custom.sensor import GitHubRepoSensor
 
