@@ -14,7 +14,7 @@ toc: true
 
 If you haven't created your floorplan image yet, I'd reccomend you take a look
 at my [previous post](https://aarongodfrey.dev/home%20automation/tips_for_creating_a_3d_floorplan_using_sweethome3d/)
-on how to use Sweet Home 3D to create your floorplan.  To create our interactive
+on how to use Sweet Home 3D to create your floorplan. To create our interactive
 floorplan we will be using a [picture-elements card](https://www.home-assistant.io/lovelace/picture-elements/).
 I'd reccomend reading Jaun's write up on using picture elements to create a
 [2D floorplan using a picture-elements card](https://www.juanmtech.com/set-up-the-picture-elements-card-in-home-assistant/).
@@ -24,35 +24,35 @@ as well as diving into some of the specifics for more advanced functionality.
 
 ## Creating the Images
 
-To get started you will need two 3D renders of your floorplan.  The first should
+To get started you will need two 3D renders of your floorplan. The first should
 be with all of the lights on and the second should be with all of the lights off.
 If you want more accurate lighting when you have multiple lights in a room you can
 also go wild and create a different render for every combination of lights on/off
-in a room.  That was a bit overkill for me, so I instead decided on 2 renders and
+in a room. That was a bit overkill for me, so I instead decided on 2 renders and
 using some photo editing software like [gimp](https://www.gimp.org/) to create
 images of rooms with the lights off.
 
 [![Image in gimp](/assets/images/0006_3d_home_gimp.png)](/assets/images/0006_3d_home_gimp.png)
 
 I ended up creating layers on top of the base image which I decided would be the
-floorplan with all of the lights on.  I then created a new layer for each room
+floorplan with all of the lights on. I then created a new layer for each room
 with the lights off by duplicating the lights off layer and deleting any part
 of the duplicated layer that was not part of the room I was creating the image
-for.  See the example below of the layer for the kitchen with the lights off.
+for. See the example below of the layer for the kitchen with the lights off.
 
 [![Kitchen Image with lights off](/assets/images/0006_kitchen_lights_off.png)](/assets/images/0006_kitchen_lights_off.png)
 
 The image above will be layered on top of the base image with the lights on and
 will be toggled in homeassistant in order to show the lights on or off in the
-kitchen based on the state of the kitchen lights.  You will need to repeat this
+kitchen based on the state of the kitchen lights. You will need to repeat this
 process for each room in order to generate all images of the rooms with the lights
-off.  You will want each of these images to be the **exact** same size as the base
-image.  In my case I ended up with 28 total images.
+off. You will want each of these images to be the **exact** same size as the base
+image. In my case I ended up with 28 total images.
 
 ## Adding a Floorplan View and Toggling Lights
 
 Below is a concise example of how to create a view for your floorplan that will
-allow you to toggle the lights in the kitchen.  They will turn on/off based on
+allow you to toggle the lights in the kitchen. They will turn on/off based on
 the state of `light.kitchen` in home assistant.
 
 ```yaml
@@ -64,7 +64,6 @@ cards:
   - type: picture-elements
     image: /local/first_floor_lights_on.png
     elements:
-
       # Lighting Overlays
       - type: image
         entity: light.kitchen
@@ -73,6 +72,7 @@ cards:
         state_image:
           "on": /local/transparent_square.png
           "off": /local/first_floor_kitchen_lights_off.png
+          "unavailable": /local/first_floor_kitchen_lights_off.png
         style:
           top: 50%
           left: 50%
@@ -83,7 +83,10 @@ cards:
         entity: light.kitchen
         tap_action:
           action: toggle
-        image: /local/transparent_square.png
+        state_image:
+          "on": /local/transparent_square.png
+          "off": /local/transparent_square.png
+          "unavailable": /local/unavailable.png
         style:
           top: 71%
           left: 40.5%
@@ -91,44 +94,56 @@ cards:
 
 A few things to note about the above example:
 
-* Set `panel: true` for your view.  This will allow it to take up the entire
+- Set `panel: true` for your view. This will allow it to take up the entire
   viewport and ensure that the layered images properly line up when you set
   the css style attributes for placement of the button to toggle the light.
-* For each light overlay set the `tap_action` and `hold_action` to `none`.  If you
+- For each light overlay set the `tap_action` and `hold_action` to `none`. If you
   do not do this, the entire image will be clickable and only toggle the last
-  overlay in your list.  Instead we will add a light toggle of a [small transparent square](/assets/images/0006_transparent_square.png)
-  that will sit on top of the light in the picture.  This way we will be
+  overlay in your list. Instead we will add a light toggle of a [small transparent square](/assets/images/0006_transparent_square.png)
+  that will sit on top of the light in the picture. This way we will be
   able to click on a small portion of the image to toggle the state of the light.
-* The `on` image for the `state_image` of each lighting overlay should also be
-  set to the transparent square image.  This will let the base image show which
+- The `on` image for the `state_image` of each lighting overlay should also be
+  set to the transparent square image. This will let the base image show which
   has the lights on.
-* Note the `style` attributes for the lighting overlay.  These values will be the
+- Specifying an `unavailable` state for the lighting overlay will prevent an ugly broken
+  image from displaying in the middle of your floorplan. The transparent square image is
+  used for the unavailable state so that we see the floorplan as normal when the entity
+  is unavailable. For the toggle we also specify an `unavailable` state, but for this one
+  we use the same image as the transparent square except I added a [red border around it](/assets/images/0006_unavailable.png).
+  This will cause the the toggle to be highlighted when it is unavailable so that you can
+  fix it. I've had this happen several times when I manually renamed an entity in the
+  configuration and forgot to update it in my floorplan. Credit to [Sp4wN's post in the community forums](https://community.home-assistant.io/t/3d-floorplan-using-lovelace-picture-elements-card/123357/61)
+  for pointing this out.
+- Note the `style` attributes for the lighting overlay. These values will be the
   same for each overlay image.
-* Ensure that you put all of your lighting overlays at the top of your view.  All
-  of the toggles should be below your overlays.  If you do not do this, then you
-  will not be able to click on any of your toggles.  So the order matters.
+- **Ensure that you put all of your lighting overlays at the top of your view. All
+  of the toggles should be below your overlays.** If you do not do this, then you
+  will not be able to click on any of your toggles. So the order matters.
 
 In order to accurately place the transparent square over top of the portion of
 the image you want to click on you will need to set it's position in the `style`
-portion of the the toggle image.  I used the chrome or firefox developer tools
+portion of the the toggle image. I used the chrome or firefox developer tools
 to find the `transparent_square.png` image then adjust it's CSS `top` and `left`
-attributes until it's centered over the light that I want to click.  In order to
+attributes until it's centered over the light that I want to click. In order to
 make it easier to see I added a red border in the style until I found the correct
-position.  For example:
+position. For example:
 
 ```yaml
 - type: image
   entity: light.kitchen
   tap_action:
     action: toggle
-  image: /local/transparent_square.png
+  state_image:
+    "on": /local/transparent_square.png
+    "off": /local/transparent_square.png
+    "unavailable": /local/unavailable.png
   style:
     top: 71%
     left: 40.5%
     border: 5px solid red
 ```
 
-The code above will result in the image you see below.  You can then freely adjust
+The code above will result in the image you see below. You can then freely adjust
 the attributes until it's in the desired location and then remove the border from
 your configuration.
 
@@ -137,8 +152,8 @@ your configuration.
 ## Creating a Floor Toggle
 
 Creating a button to toggle the floor was something I struggled to find solutions
-for.  After some investigation I settled on using an input select in combination
-with a conditional card.  Then on each card view I added a service button which
+for. After some investigation I settled on using an input select in combination
+with a conditional card. Then on each card view I added a service button which
 toggles between the floors.
 
 First I created my input select in configuration.yaml.
@@ -157,7 +172,7 @@ input_select:
 ```
 
 Next I modified my floorplan lovelace view to be a horizontal stack with
-conditional cards.  Each card is for each floor in the house.  Based on the
+conditional cards. Each card is for each floor in the house. Based on the
 value of the input select `floorplan_floor` one of the 2 cards will be displayed.
 
 **lovelace/floorplan.yaml**
@@ -181,21 +196,19 @@ cards:
           - entity: input_select.floorplan_floor
             state: "2nd Floor"
         card: !include _floorplan_second_floor.yaml
-
 ```
 
 Finally on each of the floor picture-elements cards I added a service button
-in addition to my lighting overlays and toggles.  Since I only have 2 floors
+in addition to my lighting overlays and toggles. Since I only have 2 floors
 I simply used the `input_select.select_next` service call to toggle between the
 floors when the button is clicked.
 
-**lovelace/_floorplan_first_floor.yaml**
+**lovelace/\_floorplan_first_floor.yaml**
 
 ```yaml
 type: picture-elements
 image: /local/floorplan/first_floor_lights_on.png
 elements:
-
   # Lighting Overlays...
 
   # Light Toggles...
@@ -217,16 +230,16 @@ You can see the floor toggle in action [in this demo](https://www.youtube.com/wa
 
 ## Miscellaneous Sensors
 
-I decided to show some miscellaneous sensors using `state-icon`'s.  I have
+I decided to show some miscellaneous sensors using `state-icon`'s. I have
 multiple motion sensors and cameras so I wanted to display them on the floorplan as well.
-A quick example of each can be seen below.  Each of the items is an element
+A quick example of each can be seen below. Each of the items is an element
 in the `picture-elements` card for the floor.
 
 ```yaml
 # Sensors
 - type: state-icon
   entity: binary_sensor.mud_room_motion_sensor
-  icon: 'mdi:run'
+  icon: "mdi:run"
   style:
     top: 84%
     left: 34%
@@ -256,12 +269,12 @@ in the `picture-elements` card for the floor.
 ```
 
 Both use [state-icon](https://www.home-assistant.io/lovelace/picture-elements/#icon-representing-an-entity-state)
-types.  For styling I used a semi-transparent circle which you can see in the
-screenshot below.  By default clicking on any of the icons will bring up a dialog
+types. For styling I used a semi-transparent circle which you can see in the
+screenshot below. By default clicking on any of the icons will bring up a dialog
 box showing the state history for the entity that was clicked on.
 
 For the cameras I added a `tap_action` that calls a script which will arm/disarm
-the camera.  If you hold-click on one of the camera sensors it will bring up the
+the camera. If you hold-click on one of the camera sensors it will bring up the
 state history.
 
 [![state icons](/assets/images/0006_state_icons.png)](/assets/images/0006_state_icons.png)
@@ -289,7 +302,7 @@ when they are clicked.
 ## TV Toggle
 
 One of the other cool things about my floorplan is the ability to see at a glance
-if the TV is on or off.  Additionally clicking on the TV will toggle it on/off.
+if the TV is on or off. Additionally clicking on the TV will toggle it on/off.
 You can see below on the left what the TV looks like when it is off versus the
 right when it is on.
 
@@ -329,12 +342,13 @@ The `on` image for the TV state is simply a [semi-transparent white rectangle th
 I also manually adjusted the width and height of the tv toggle so that it's a
 rectangle that more or less encompases the TV in the floorplan.
 
-To create the actual switch I used a `command_line` platform switch.  I have a
+To create the actual switch I used a `command_line` platform switch. I have a
 raspberry pi connected to my TV that has the [cec-client](http://manpages.ubuntu.com/manpages/precise/man1/cec-client.1.html)
-installed.  I run a command over SSH to get the status of the TV.  You can see
+installed. I run a command over SSH to get the status of the TV. You can see
 the switch below (with the IP address obfuscated).
 
 **configuration.yaml**
+
 ```yaml
 switch:
   - platform: command_line
@@ -350,5 +364,5 @@ switch:
 ## Wrap Up
 
 It took me quite some time to figure out how to do all of the cool things I've
-documented above.  I hope this helps out others who want to add a 3D floorplan
+documented above. I hope this helps out others who want to add a 3D floorplan
 to their home assistant installation.
