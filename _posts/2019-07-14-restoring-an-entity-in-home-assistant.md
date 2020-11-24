@@ -10,7 +10,7 @@ tags:
 ---
 
 ## The Problem
-Recently I was developing a custom compontent which does some web scraping to
+Recently I was developing a custom component which does some web scraping to
 get the status of my virtual punchard at my crossfit gym.  It grabs the number
 of classes remaining as the state for the sensor then stores some other attributes
 like the expiration date, if it's expired, classes remaining and total classes purchased.
@@ -143,7 +143,7 @@ async def async_added_to_hass(self) -> None:
     )
 ```
 
-I had to explictly check that one of the known keys was already in the state's
+I had to explicitly check that one of the known keys was already in the state's
 attributes before attempting to access them.  If an update of values for the
 sensor had not yet run this would not have these keys in them.  Then I simply
 set the dict on my `self.attrs` attribute.  I then restarted Home Assistant and my

@@ -12,11 +12,11 @@ tags:
 toc: true
 ---
 
-If you haven't created your floorplan image yet, I'd reccomend you take a look
+If you haven't created your floorplan image yet, I'd recommend you take a look
 at my [previous post](https://aarongodfrey.dev/home%20automation/tips_for_creating_a_3d_floorplan_using_sweethome3d/)
 on how to use Sweet Home 3D to create your floorplan. To create our interactive
 floorplan we will be using a [picture-elements card](https://www.home-assistant.io/lovelace/picture-elements/).
-I'd reccomend reading Jaun's write up on using picture elements to create a
+I'd recommend reading Jaun's write up on using picture elements to create a
 [2D floorplan using a picture-elements card](https://www.juanmtech.com/set-up-the-picture-elements-card-in-home-assistant/).
 
 In the remainder of this post I will document the basic code and configuration

@@ -546,7 +546,7 @@ configuration.
 ```
 Clicking on the reset icon will pop up a confirmation alert that you will have to
 click on to continue with the action.  This was added to prevent an accidental
-click on the card from reseting the counter.
+click on the card from resetting the counter.
 
 The assets for the above cards can be found below:
 * [filter.png](/assets/images/0009_filter.png)

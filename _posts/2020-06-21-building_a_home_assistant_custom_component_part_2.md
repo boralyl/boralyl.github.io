@@ -1,8 +1,8 @@
 ---
-title: "Bulding a Home Assistant Custom Component Part 2: Unit Testing and Continuous Integration"
+title: "Building a Home Assistant Custom Component Part 2: Unit Testing and Continuous Integration"
 excerpt: >
   Part 2 of building a custom component in Home Assistant.  In this post we'll
-  examine how to setup unit testing and continous integration using GitHub actions.
+  examine how to setup unit testing and continuous integration using GitHub actions.
   We'll also write some tests for our custom component.
 categories:
   - home automation
@@ -20,10 +20,11 @@ toc: true
 ---
 
 <div>
-  <p>This is the first part of a multi-part tutorial to create a Home Assistant custom component.</p>
+  <p>This is the second part of a multi-part tutorial to create a Home Assistant custom component.</p>
   <ul>
     <li><a href="https://aarongodfrey.dev/home%20automation/building_a_home_assistant_custom_component_part_1/">Part 1 - Project Structure and Basics</a></li>
     <li>Part 2 - Unit Testing and Continuous Integration (Reading Now!)</li>
+    <li><a href="https://aarongodfrey.dev/home%20automation/building_a_home_assistant_custom_component_part_3/">Part 3 - Config Flow</a></li>
   </ul>
 </div>
 {: .notice--info}
@@ -111,7 +112,7 @@ async def test_async_update_failed():
 In this test we are verifying that if there is an exception raised in our
 `async_update` function that we set the availability of our sensor to `False`.
 
-I would reccomend reading through the unit tests for some of the
+I would recommend reading through the unit tests for some of the
 [platinum quiality](https://github.com/home-assistant/core/search?q=platinum&unscoped_q=platinum)
 components in Home Assistant Core to get a better idea of what to test and how to
 do it. As of writing this post those are:
@@ -140,9 +141,9 @@ custom components:
 
 ## Continuous Integration
 
-[Continous Integration](https://en.wikipedia.org/wiki/Continuous_integration) allows
+[Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration) allows
 running various checks on your code each time it is committed to the repository
-(among other tasks). I'll specfically be talking about [GitHub Actions](https://github.com/features/actions)
+(among other tasks). I'll specifically be talking about [GitHub Actions](https://github.com/features/actions)
 in this post, but you can also use other services like [Travis CI](https://travis-ci.org/)
 to achieve the same effect.
 
@@ -271,7 +272,7 @@ codespell........................Failed
 - hook id: codespell
 - exit code: 1
 
-README.md:21: reccomend  ==> recommend
+README.md:21: recommend  ==> recommend
 
 flake8...........................(no files to check)Skipped
 bandit...........................(no files to check)Skipped
@@ -282,7 +283,7 @@ mypy.............................(no files to check)Skipped
 
 Any check failures will abort your commit and you will need to fix any issues
 and try to re-commit again. If for some reason you need to commit something and
-want to bypass the checks you can specify the `--no-verify` flag when commiting.
+want to bypass the checks you can specify the `--no-verify` flag when committing.
 
 ```bash
 $ git commit -a --no-verify

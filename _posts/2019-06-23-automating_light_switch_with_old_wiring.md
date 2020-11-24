@@ -41,7 +41,7 @@ with my Xioami and Ikea devices, so it seemed like a good fit.
 [![THIRDREALITY Light Switch Plus](/assets/images/0002_thirdreality.jpg)](/assets/images/0002_thirdreality.jpg)
 
 It works with both rocker switches and your standard US up/down light switch.
-It took a minute or so to install and then I went about pairing it with the bultin
+It took a minute or so to install and then I went about pairing it with the builtin
 ZHA service in homeassistant.  To my surprise it paired easily and showed up in
 the zigbee integration panel as `Third Reality, Inc 3RSS008Z`.  I was then able
 to easily toggle it via the lovelace UI and add it in to automations in Node-Red.

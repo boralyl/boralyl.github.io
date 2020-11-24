@@ -42,12 +42,12 @@ I was able to side-load the required version
 of the android Mi Home app without any issue.  I was also able to find the access
 token in the logs on the sd-card.  The problem I ran into was that I wasn't actually
 able to add the vacuum in the Mi Home app.  On the final step within the app I would always
-recieve the following error: `Failed to start extension, try again`.  Technically
+receive the following error: `Failed to start extension, try again`.  Technically
 I could have just used the access token and started automating the vacuum, but
 I would have not been able to use any of the map features like creating zones to
 be cleaned.
 
-Using the roborock app reccomended by the manufacturer I was able to successfully
+Using the roborock app recommended by the manufacturer I was able to successfully
 add the vacuum, but there was no way to retrieve the access token.  In order to
 add the vacuum to either app you have to reset it's wifi settings which causes the
 previous access token to be revoked.

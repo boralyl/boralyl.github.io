@@ -22,7 +22,7 @@ I showed off my 3D floorplan in home assistant.  In this post I'm going to give
 some tips for creating your own 3D floorplan for use in home assistant. I'm
 going to focus more on things that I wish I knew when I first got started.
 
-Before you start using [SweetHome3D](http://www.sweethome3d.com/), I highly reccomend
+Before you start using [SweetHome3D](http://www.sweethome3d.com/), I highly recommend
 that you check out [this video](https://www.youtube.com/watch?v=HBXIOj5ndo4&feature=youtu.be)
 from [DrZzS](https://www.youtube.com/channel/UC7G4tLa4Kt6A9e3hJ-HO8ng) that goes
 over the basics of creating your floorplan.  I found it extremely useful and it

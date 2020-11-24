@@ -1,5 +1,5 @@
 ---
-title: "Bulding a Home Assistant Custom Component Part 1: Project Structure and Basics"
+title: "Building a Home Assistant Custom Component Part 1: Project Structure and Basics"
 excerpt: >
   Part 1 of building a custom component in Home Assistant.  To get started we'll
   go over the idea of the component we will be building, the project structure
@@ -23,6 +23,7 @@ toc: true
   <ul>
     <li>Part 1 - Project Structure and Basics (Reading Now!)</li>
     <li><a href="https://aarongodfrey.dev/home%20automation/building_a_home_assistant_custom_component_part_2/">Part 2 - Unit Testing and Continuous Integration</a></li>
+    <li><a href="https://aarongodfrey.dev/home%20automation/building_a_home_assistant_custom_component_part_3/">Part 3 - Config Flow</a></li>
   </ul>
 </div>
 {: .notice--info}
@@ -47,7 +48,7 @@ own editor, or browse the code for each post by looking at the appropriate branc
 The changes added in this part can be viewed on the [feature/part1 branch](https://github.com/boralyl/github-custom-component-tutorial/compare/feature/bare-repo...feature/part1?expand=1).
 
 I'd suggest checking out the official [developer documentation](https://developers.home-assistant.io/)
-to give yourself a better idea of all of the concepts in the Home Assistant architechture.
+to give yourself a better idea of all of the concepts in the Home Assistant architecture.
 
 ## Project Structure
 
@@ -139,7 +140,7 @@ we need to specify the `aiohttp` extra in the requirement.
 
 ### Platform Configuration Schema
 
-For our platform configuration schema, we are going to follow that of the offical
+For our platform configuration schema, we are going to follow that of the official
 [GitHub integration](https://www.home-assistant.io/integrations/github/). A basic
 example would look like:
 
@@ -227,7 +228,7 @@ the previous update prior to restarting).
 
 ### GitHubRepoSensor Entity and async_update
 
-The last part of our component is defining our entity and specifying an udpate
+The last part of our component is defining our entity and specifying an update
 method. For brevity, I'm not going to include the full class, but you can view
 it [in GitHub](https://github.com/boralyl/github-custom-component-tutorial/blob/3ee4d35f4bb08ec92098e7932fd4ae29ef59591f/custom_components/github_custom/sensor.py#L98-L212).
 

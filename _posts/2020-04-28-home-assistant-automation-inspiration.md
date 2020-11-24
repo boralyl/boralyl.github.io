@@ -91,10 +91,10 @@ also sent to our phones in the event no one is home or we aren't watching TV.
 The Unifi camera entity is added using the [unifiprotect custom component](https://github.com/briis/unifiprotect).
 When the motion sensor triggers a motion event, I set a 2 second timer since it tends
 to trigger before anyone is fully on the porch.  This allows the snapshot image to
-be more useful.  To get the snapshot I use the [`camera.snapshot`](https://www.home-assistant.io/integrations/camera#service-snapshot) service and specify the `filename` service data attirbute
+be more useful.  To get the snapshot I use the [`camera.snapshot`](https://www.home-assistant.io/integrations/camera#service-snapshot) service and specify the `filename` service data attribute
 as a file in my local www directory (e.g. `filename: /config/www/snapshot.jpg`).
-This will get overwitten everytime there is a new motion event, but that's not a problem
-since it's only used once to send the notifcations to our phones and TV.  Finally
+This will get overwritten every time there is a new motion event, but that's not a problem
+since it's only used once to send the notifications to our phones and TV.  Finally
 the notification is sent using the [`notify`](https://www.home-assistant.io/integrations/notify)
 integration in conjunction with the entity added by the [`mobile_app`](https://www.home-assistant.io/integrations/mobile_app) integration.
 
@@ -164,7 +164,7 @@ the problems is some apps have DRM protection so it's not possible to capture an
 image of what is playing.  This causes the service to just see black, so the lights
 remain off.  So I created a whitelist of apps that have DRM protection like Netflix.
 For these apps, it simply turns on a 50% white color.  For all other apps it will
-start the service to match the light colors based on whats on the screen.
+start the service to match the light colors based on what's on the screen.
 
 The last problem is with kodi.  When the hyperion service starts it momentarily
 is in the foreground (even though you don't see it starting).  This causes kodi
@@ -176,7 +176,7 @@ this is the maximum amount of time for the hyperion service to start.
 
 ## Vacuum
 
-I've written extensively about the automations I use with my Roborock S4 Vaccum
+I've written extensively about the automations I use with my Roborock S4 Vacuum
 in [a previous post](https://aarongodfrey.dev/home%20automation/roborock_s4_home_assistant_automations/),
 so if you haven't read that post yet, take a look!
 

@@ -40,7 +40,7 @@ define automations when I can simply write them in yaml?
 Home Assistant uses their UI or [yaml](https://www.home-assistant.io/integrations/automation/)
 to define automations.  For basic automations this works just fine, however once
 you add more devices and want to do more automations based on the states of those
-devices, the yaml format becomes particulary limiting and cumbersome.
+devices, the yaml format becomes particularly limiting and cumbersome.
 
 ### More Powerful Automations
 
@@ -100,7 +100,7 @@ with a video tutorial](https://www.juanmtech.com/get-started-with-node-red-and-h
 that is kept up to date.
 
 The [y](https://zachowj.github.io/node-red-contrib-home-assistant-websocket/)
-palatte that is used to interact with Home Assistant not only has detailed
+palette that is used to interact with Home Assistant not only has detailed
 documentation on the nodes it provides, but also has a basic tutorial and some
 cookbook recipes to inspire you.
 
@@ -147,7 +147,7 @@ I currently organize my flows into the following tabs (*note: each tab is a [flo
 
 ### Running Automations on a Schedule
 
-This wasn't super obvious to me when I frist started using Node-RED, but the way
+This wasn't super obvious to me when I first started using Node-RED, but the way
 to do this is very simple.  The answer is using an [Inject Node](https://nodered.org/docs/user-guide/nodes#inject).
 
 [![Inject Node](/assets/images/0010_inject_interval.png)](/assets/images/0010_inject_interval.png)
@@ -318,7 +318,7 @@ Here is an example of what you would see in your flow:
 [![Entity Auto-Complete](/assets/images/0010_autocomplete.png)](/assets/images/0010_autocomplete.png)
 
 Another really useful feature of of the `node-red-contrib-home-assistant-websocket`
-palatte is that it will auto-complete your entity names when you begin typing.
+palette is that it will auto-complete your entity names when you begin typing.
 There is a caveat to this though.  If you add an entity while Node-RED is running
 it will not show up in the auto-complete dropdown.  It will still work if you
 manually type it in, however.  In order to get the newly added entities to show
