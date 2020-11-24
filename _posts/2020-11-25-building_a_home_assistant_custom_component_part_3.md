@@ -32,7 +32,7 @@ toc: true
 ## Introduction
 
 In this post we will be updating the custom component to be able to be configurable
-via the UI by adding a [config flow](https://developers.home-assistant.io/docs/config_entries_config_flow_handler).
+via the UI, by adding a [config flow](https://developers.home-assistant.io/docs/config_entries_config_flow_handler).
 We are still using the same example project, [github-custom-component](https://github.com/boralyl/github-custom-component-tutorial).
 You can find the diff for this post on the [feature/part3](https://github.com/boralyl/github-custom-component-tutorial/compare/feature/part2...feature/part3) branch.
 
@@ -58,8 +58,8 @@ Next up we will create our [config_flow.py](https://github.com/boralyl/github-cu
 Within this file we will extend the `ConfigFlow` class and define the different steps
 that should show up in the UI when a user is setting up the component for the first time.
 
-As of writing, having a component that requires an unknown size list of configuration
-values isn't the easiest thing to do via config flow. To try to get around this limitation
+As of writing, having a component that requires an unknown sized list of configuration
+values isn't the easiest thing to do via config flow. To try to get around this limitation,
 I decided to design the config flow to have 2 steps. The first step asks for the user's
 GitHub access token and optional enterprise server URL. After submitting that information
 the user precedes to the second step which allows them to enter a repository and optional
@@ -104,15 +104,15 @@ the data schema that you defined. I added some additional validation that will u
 provided access token to ensure it's validity. If it fails we set the base error to
 `auth`. This value corresponds with the errors object in the [strings.json](https://github.com/boralyl/github-custom-component-tutorial/blob/master/custom_components/github_custom/strings.json#L4) and will display the description defined there.
 
-If there are no errors the data is stored in the `self.data` attribute of the class. In
+If there are no errors, the data is stored in the `self.data` attribute of the class. In
 addition to storing the entered data I also initialize an empty list for the repositories
-that will be added in the next step. Finally we call the next step's method `asyn_step_repo`
+that will be added in the next step. Finally, we call the next step's method `asyn_step_repo`
 to advance the user to the second form where they can enter all of the GitHub repositories
 that they want to monitor.
 
 ### Repo Step
 
-The [async_step_repo](https://github.com/boralyl/github-custom-component-tutorial/blob/master/custom_components/github_custom/config_flow.py#L74) method is invoked by us after the
+The [async_step_repo](https://github.com/boralyl/github-custom-component-tutorial/blob/master/custom_components/github_custom/config_flow.py#L74) method is invoked after the
 user successfully completes the initial step. This step is responsible for showing a form
 to enter repository information. If the user ticks the `Add another repo` checkbox then
 we save the entered data and reset the form on submit.
@@ -160,7 +160,7 @@ Home Assistant.
 
 ## Setting Up the Config Entry
 
-The next thing that we need to do is set up our sensors from config entry that was
+The next thing that we need to do is set up our sensors from the config entry that was
 created. In the `__init__.py` file we define an `async_setup_entry` function that will
 forward the task to the sensor platform. For more details on how this works I encourage
 you to checkout out the excellent [documentation on the subject](https://developers.home-assistant.io/docs/config_entries_index/).
@@ -188,7 +188,7 @@ corresponding to each of those cases.
 
 We then forward the setup to the `sensor` platform. In [sensor.py](https://github.com/boralyl/github-custom-component-tutorial/blob/master/custom_components/github_custom/sensor.py)
 we add an `async_setup_entry` function which will accept a config entry instance and create
-the sensors for the component. You will notice this function looks near identical to the
+the sensors for the component. You will notice this function looks nearly identical to the
 `async_setup_platform` function below it which is used for setting up the sensors from
 `configuration.yaml`. The only difference is we retrieve the config data from the config
 entry instance.
@@ -213,7 +213,7 @@ I briefly touched on [strings.json](https://github.com/boralyl/github-custom-com
 contains strings used in the config flow process. I copied `strings.json` into the `translations`
 folder and renamed it `en.json` for the English translation. You can add as many translation files as you would like, they
 should be named using the 2 letter ISO 639-2 language code. All the keys should be the same as
-the `strings.json` and the values should be the translated string. For example this is
+the `strings.json` and the values should be the translated string. For example, this is
 the Norwegian translation file for another one of my custom components: [nb.json](https://github.com/boralyl/steam-wishlist/blob/master/custom_components/steam_wishlist/translations/nb.json).
 
 For more information on translations in custom components check out the [official documentation](https://developers.home-assistant.io/docs/internationalization/custom_integration/#translation-strings).
