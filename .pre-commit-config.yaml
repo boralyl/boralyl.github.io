@@ -3,5 +3,7 @@ repos:
     rev: v1.17.1
     hooks:
       - id: codespell
-        args: ["--quiet-level=2"]
-
+        args: 
+          - "--quiet-level=2"
+          - "--ignore-words-list=hass"
+        
