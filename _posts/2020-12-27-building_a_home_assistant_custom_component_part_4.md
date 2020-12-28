@@ -34,7 +34,7 @@ toc: true
 ## Introduction
 
 In this post we will be adding an [Options flow](https://developers.home-assistant.io/docs/config_entries_options_flow_handler/)
-to our custom component. We are still using the same example project, [github-custom-component](https://github.com/boralyl/github-custom-component-tutorial).
+to our custom component. We are still using the same example project, [github-custom-component-tutorial](https://github.com/boralyl/github-custom-component-tutorial).
 You can find the diff for this post on the [feature/part4](https://github.com/boralyl/github-custom-component-tutorial/compare/feature/part3...feature/part4) branch.
 
 The options flow allows a user to configure additional options for the component at any
@@ -47,8 +47,8 @@ prior to continuing along with the tutorial.
 
 ## Enable Options Support
 
-Per the [documentation](https://developers.home-assistant.io/docs/config_entries_options_flow_handler/#options-support)
-the first step is to define a method on your config flow class that let's it know that the
+Per the [documentation](https://developers.home-assistant.io/docs/config_entries_options_flow_handler/#options-support),
+the first step is to define a method on your config flow class that lets it know that the
 component supports options. In our case we will add this to our [GithubCustomConfigFlow](https://github.com/boralyl/github-custom-component-tutorial/blob/master/custom_components/github_custom/config_flow.py#L120-L124) class.
 
 ```python
@@ -212,7 +212,7 @@ return self.async_create_entry(
 ## Register Options Update Listener
 
 In order for our component to know that options have changed and to be able to act on them,
-we must register and update listener when initially setting up our config entry. In our
+we must register and update a listener when initially setting up our config entry. In our
 `__init__.py` file we will define our update listener function and register it with the
 config entry.
 
@@ -269,7 +269,7 @@ async def async_setup_entry(
 
 ## Options Flow in the Github Custom Component
 
-Now that I went over the general information on using an options flow I wanted to return
+Now that I went over the general information on using an options flow, I wanted to return
 to the custom component we've been building in this tutorial. The options flow I added
 performs actions that I haven't seen in any other options flows. Mainly it allows for
 removing repos that have been added as well as adding new repos via the options flow form.
@@ -310,7 +310,7 @@ configured.
 
 ### Adding a Repo
 
-If the user enters a value for the `path` input we will then add a new repo. That logic
+If the user enters a valid value for the `path` input, we will then add a new repo. That logic
 is shown below:
 
 ```python
@@ -413,7 +413,7 @@ async def test_options_flow_remove_repo(m_github, hass):
 We first need to create a mock config entry and add it to Home Assistant. Next we generate
 the initial options flow and capture the flow id. The flow id is used when we call
 `hass.config_entries.options.async_configure` and pass in our `user_input` data. In this
-case we are simulating unchecking the only repos that was configured.
+case we are simulating unchecking the only repo that was configured.
 
 Check out the [post on unit testing](https://aarongodfrey.dev/home%20automation/building_a_home_assistant_custom_component_part_2/) for more details on the fixtures and helpers used
 here.
