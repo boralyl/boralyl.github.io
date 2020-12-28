@@ -25,6 +25,7 @@ toc: true
     <li><a href="https://aarongodfrey.dev/home%20automation/building_a_home_assistant_custom_component_part_1/">Part 1 - Project Structure and Basics</a></li>
     <li><a href="https://aarongodfrey.dev/home%20automation/building_a_home_assistant_custom_component_part_2/">Part 2 - Unit Testing and Continuous Integration</a></li>
     <li>Part 3 - Config Flow (Reading Now!)</li>
+    <li><a href="https://aarongodfrey.dev/home%20automation/building_a_home_assistant_custom_component_part_4/">Part 4 - Options Flow</a></li>
   </ul>
 </div>
 {: .notice--info}
