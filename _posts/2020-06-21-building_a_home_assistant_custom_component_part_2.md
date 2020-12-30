@@ -26,6 +26,7 @@ toc: true
     <li>Part 2 - Unit Testing and Continuous Integration (Reading Now!)</li>
     <li><a href="https://aarongodfrey.dev/home%20automation/building_a_home_assistant_custom_component_part_3/">Part 3 - Config Flow</a></li>
     <li><a href="https://aarongodfrey.dev/home%20automation/building_a_home_assistant_custom_component_part_4/">Part 4 - Options Flow</a></li>
+    <li><a href="https://aarongodfrey.dev/home%20automation/building_a_home_assistant_custom_component_part_5/">Part 5 - Debugging</a></li>
   </ul>
 </div>
 {: .notice--info}
