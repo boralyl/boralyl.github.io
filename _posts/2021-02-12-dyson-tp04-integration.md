@@ -145,7 +145,7 @@ sensor:
 
 One thing I noticed about the AQI sensor, is that the integration simply returns the maximum
 number from the PM2.5, PM10, NO2 and VOC sensors as it's value. That particular value isn't
-all that useful since each of those sensors have their own measurement. It's not clear in
+all that useful since each of those sensors have their own unit of measurement. It's not clear in
 the Dyson Link app how that value is calculated and it isn't exposed in the MQTT data.
 
 What I wanted was a number like I use for my [PurpleAir PA-I-Indoor sensor](https://www2.purpleair.com/collections/air-quality-sensors/products/purpleair-pa-i-indoor). Fortunately the formula
