@@ -19,7 +19,7 @@ toc: true
 
 I currently reside in the Pacific North West and wild fires occur in the region seasonally.
 With the rise of climate change they are getting worse, so after last year's several week
-stint of hazardous air quiality I wanted to pick up an air purifier to help indoors.
+stint of hazardous air quality I wanted to pick up an air purifier to help indoors.
 
 Naturally, I was inclined to find an air purifier that I could control with Home Assistant
 and would ideally operate locally without the need for the cloud. During my research the
