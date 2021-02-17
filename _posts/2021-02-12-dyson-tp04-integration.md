@@ -150,7 +150,8 @@ the Dyson Link app how that value is calculated and it isn't exposed in the MQTT
 
 What I wanted was a number like I use for my [PurpleAir PA-I-Indoor sensor](https://www2.purpleair.com/collections/air-quality-sensors/products/purpleair-pa-i-indoor). Fortunately the formula
 was pulled from the javascript code in the purple air site [in this community post](https://community.home-assistant.io/t/purpleair-air-quality-sensor/146588). Using that formula I created
-my own calculated AQI based on PM2.5 as a template sensor:
+my own calculated AQI based on PM2.5 as a template sensor (this can be added with the other
+template sensors created above):
 
 ```yaml
 - platform: template
