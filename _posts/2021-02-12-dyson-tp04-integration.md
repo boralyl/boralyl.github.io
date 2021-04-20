@@ -64,6 +64,24 @@ reading some reviews I ended up justifying the cost based on the following reaso
 
 ## Integration
 
+<div>
+<strong>Update 20201-04-19:</strong>
+
+<p>
+A few months ago, the official integration broke due to an external dependency that is not
+being maintained. Dyson made some updates and added 2FA which broke the external dependency.
+</p>
+<p>
+I now recommend that you use the <a href="https://github.com/shenxn/ha-dyson">ha-dyson</a> custom
+integration that can be installed via HACS. It not only works, but also can be used 100%
+locally after the initial setup to gather authentication data for you devices from the cloud.
+</p>
+<p>
+I'm leaving the rest of the original instructions this section here for posterity.
+</p>
+</div>
+{: .notice--warning}
+
 After installing the Dyson Link app and connecting the air purifier, I added the necessary
 [configuration](https://www.home-assistant.io/integrations/dyson/) to my `configuration.yaml`.
 
