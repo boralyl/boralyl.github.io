@@ -7,7 +7,7 @@ categories:
   - home automation
 tags:
   - homeassistant
-  - developemnt
+  - development
   - custom_component
 header:
   image: /assets/images/0019_header.jpg
