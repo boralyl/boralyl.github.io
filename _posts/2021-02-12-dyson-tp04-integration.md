@@ -118,6 +118,16 @@ As of writing the following additional services are available for this model:
 
 ## Template Sensors
 
+<div>
+<strong>Update 20201-04-19:</strong>
+
+<p>
+These template sensors are no longer needed if you are using the <a href="https://github.com/shenxn/ha-dyson">ha-dyson</a> custom
+integration that can be installed via HACS.
+</p>
+</div>
+{: .notice--warning}
+
 While there are attributes on the fan entity that is created for the various sensors,
 I wanted to pull each of them out into their own sensor. My primary reason for this was
 so that data could be fed to [influxdb](https://www.influxdata.com/products/influxdb/) and I could visualize it using [grafana](https://grafana.com/). I ended up creating separate sensors
@@ -183,23 +193,23 @@ template sensors created above):
         {% raw %}{% macro calcAQI(Cp, Ih, Il, BPh, BPl) -%}
           {{ (((Ih - Il)/(BPh - BPl)) * (Cp - BPl) + Il)|round }}
         {%- endmacro %}
-        {% if (states("sensor.dyson_particulate_matter_2_5")|float) > 1000 %}
+        {% if (state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float) > 1000 %}
           invalid
-        {% elif (states("sensor.dyson_particulate_matter_2_5")|float) > 350.5 %}
-        {{ calcAQI((states("sensor.dyson_particulate_matter_2_5")|float), 500.0, 401.0, 500.0, 350.5) }}
-        {% elif (states("sensor.dyson_particulate_matter_2_5")|float) > 250.5 %}
-         {% elif (states("sensor.dyson_particulate_matter_2_5")|float) > 250.5 %}
-        {{ calcAQI((states("sensor.dyson_particulate_matter_2_5")|float), 400.0, 301.0, 350.4, 250.5) }}
-        {% elif (states("sensor.dyson_particulate_matter_2_5")|float) > 150.5 %}
-          {{ calcAQI((states("sensor.dyson_particulate_matter_2_5")|float), 300.0, 201.0, 250.4, 150.5) }}
-        {% elif (states("sensor.dyson_particulate_matter_2_5")|float) > 55.5 %}
-          {{ calcAQI((states("sensor.dyson_particulate_matter_2_5")|float), 200.0, 151.0, 150.4, 55.5) }}
-        {% elif (states("sensor.dyson_particulate_matter_2_5")|float) > 35.5 %}
-          {{ calcAQI((states("sensor.dyson_particulate_matter_2_5")|float), 150.0, 101.0, 55.4, 35.5) }}
-        {% elif (states("sensor.dyson_particulate_matter_2_5")|float) > 12.1 %}
-          {{ calcAQI((states("sensor.dyson_particulate_matter_2_5")|float), 100.0, 51.0, 35.4, 12.1) }}
-        {% elif (states("sensor.dyson_particulate_matter_2_5")|float) >= 0.0 %}
-          {{ calcAQI((states("sensor.dyson_particulate_matter_2_5")|float), 50.0, 0.0, 12.0, 0.0) }}
+        {% elif (state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float) > 350.5 %}
+        {{ calcAQI((state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float), 500.0, 401.0, 500.0, 350.5) }}
+        {% elif (state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float) > 250.5 %}
+         {% elif (state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float) > 250.5 %}
+        {{ calcAQI((state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float), 400.0, 301.0, 350.4, 250.5) }}
+        {% elif (state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float) > 150.5 %}
+          {{ calcAQI((state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float), 300.0, 201.0, 250.4, 150.5) }}
+        {% elif (state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float) > 55.5 %}
+          {{ calcAQI((state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float), 200.0, 151.0, 150.4, 55.5) }}
+        {% elif (state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float) > 35.5 %}
+          {{ calcAQI((state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float), 150.0, 101.0, 55.4, 35.5) }}
+        {% elif (state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float) > 12.1 %}
+          {{ calcAQI((state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float), 100.0, 51.0, 35.4, 12.1) }}
+        {% elif (state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float) >= 0.0 %}
+          {{ calcAQI((state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float), 50.0, 0.0, 12.0, 0.0) }}
         {% else %}
           invalid
         {% endif %}{% endraw %}
@@ -242,9 +252,9 @@ make sure to update entity names referenced in the yaml to match your names. The
 thing you will need is the background image which can be [downloaded here](/assets/images/0017_card_background.png).
 
 ```yaml
-- type: 'custom:card-templater'
+- type: "custom:card-templater"
   entities:
-    - fan.bedroom
+    - fan.master_bedroom
     - sensor.dyson_calc_aqi
     - sensor.dyson_volatile_organic_compounds
     - sensor.dyson_nitrogen_dioxide
@@ -252,19 +262,18 @@ thing you will need is the background image which can be [downloaded here](/asse
     - sensor.dyson_particulate_matter_10
   card:
     type: picture-elements
-    image: "/local/card_background.png"
+    image: "/local/tp-04.png"
     elements:
-
       # Buttons
       {% raw %}
       - type: state-icon
         icon: mdi:power
-        entity: fan.bedroom
+        entity: fan.master_bedroom
         tap_action:
           action: call-service
           service: fan.toggle
           service_data:
-            entity_id: fan.bedroom
+            entity_id: fan.master_bedroom
         style:
           left: 0
           right: 0
@@ -280,15 +289,13 @@ thing you will need is the background image which can be [downloaded here](/asse
       - type: state-icon
         state_color: false
         icon: mdi:sleep
-        title_template: 'Night mode {% if state_attr("fan.bedroom", "night_mode") %}(click to disable){% else %}(click to enable){% endif %}'
-        entity: fan.bedroom
+        title_template: 'Night mode {% if states("switch.master_bedroom_night_mode") == "on" %}(click to disable){% else %}(click to enable){% endif %}'
+        entity: fan.master_bedroom
         tap_action:
           action: call-service
-          service: dyson.set_night_mode
+          service: switch.toggle
           service_data:
-            entity_id: fan.bedroom
-            night_mode_template: >-
-              {% if state_attr("fan.bedroom", "night_mode") %}false{% else %}true{% endif %}
+            entity_id: switch.master_bedroom_night_mode
         style:
           right: 0
           bottom: 0
@@ -296,20 +303,18 @@ thing you will need is the background image which can be [downloaded here](/asse
           transform: translate(0%,0%)
           font-size: 16px
           line-height: 16px
-          --paper-item-icon-color_template: '{% if state_attr("fan.bedroom", "night_mode") %}green{% else %}rgb(68, 115, 158){% endif %}'
+          --paper-item-icon-color_template: '{% if states("switch.master_bedroom_night_mode") == "on" %}green{% else %}rgb(68, 115, 158){% endif %}'
 
       - type: state-icon
         state_color: false
         icon: mdi:alpha-a-circle
-        title_template: 'Auto mode {% if state_attr("fan.bedroom", "auto_mode") %}(click to disable){% else %}(click to enable){% endif %}'
-        entity: fan.bedroom
+        title_template: 'Auto mode {% if states("switch.master_bedroom_auto_mode") == "on" %}(click to disable){% else %}(click to enable){% endif %}'
+        entity: fan.master_bedroom
         tap_action:
           action: call-service
-          service: dyson.set_auto_mode
+          service: switch.toggle
           service_data:
-            entity_id: fan.bedroom
-            auto_mode_template: >-
-              {% if state_attr("fan.bedroom", "auto_mode") %}false{% else %}true{% endif %}
+            entity_id: switch.master_bedroom_auto_mode
         style:
           right: 61px
           bottom: 0
@@ -317,20 +322,20 @@ thing you will need is the background image which can be [downloaded here](/asse
           transform: translate(0%,0%)
           font-size: 16px
           line-height: 16px
-          --paper-item-icon-color_template: '{% if state_attr("fan.bedroom", "auto_mode") %}green{% else %}rgb(68, 115, 158){% endif %}'
+          --paper-item-icon-color_template: '{% if states("switch.master_bedroom_auto_mode") == "on" %}green{% else %}rgb(68, 115, 158){% endif %}'
 
       - type: state-icon
         state_color: false
         icon: mdi:air-purifier
-        title_template: 'Airflow direction {% if state_attr("fan.bedroom", "flow_direction_front") %}(click to set flow direction behind){% else %}(click to set flow direction to front){% endif %}'
-        entity: fan.bedroom
+        title_template: 'Airflow direction {% if state_attr("fan.master_bedroom", "flow_direction_front") %}(click to set flow direction behind){% else %}(click to set flow direction to front){% endif %}'
+        entity: fan.master_bedroom
         tap_action:
           action: call-service
           service: dyson.set_flow_direction_front
           service_data:
-            entity_id: fan.bedroom
+            entity_id: fan.master_bedroom
             flow_direction_front_template: >-
-              {% if state_attr("fan.bedroom", "flow_direction_front") %}false{% else %}true{% endif %}
+              {% if state_attr("fan.master_bedroom", "flow_direction_front") %}false{% else %}true{% endif %}
         style:
           right: 122px
           bottom: 0
@@ -338,20 +343,20 @@ thing you will need is the background image which can be [downloaded here](/asse
           transform: translate(0%,0%)
           font-size: 16px
           line-height: 16px
-          --paper-item-icon-color_template: '{% if state_attr("fan.bedroom", "flow_direction_front") %}green{% else %}rgb(68, 115, 158){% endif %}'
+          --paper-item-icon-color_template: '{% if state_attr("fan.master_bedroom", "flow_direction_front") %}green{% else %}rgb(68, 115, 158){% endif %}'
 
       - type: state-icon
         state_color: false
         icon: mdi:arrow-split-vertical
-        title_template: 'Oscillation {% if state_attr("fan.bedroom", "oscillating") %}(click to turn off){% else %}(click to turn on){% endif %}'
-        entity: fan.bedroom
+        title_template: 'Oscillation {% if state_attr("fan.master_bedroom", "oscillating") %}(click to turn off){% else %}(click to turn on){% endif %}'
+        entity: fan.master_bedroom
         tap_action:
           action: call-service
           service: fan.oscillate
           service_data:
-            entity_id: fan.bedroom
+            entity_id: fan.master_bedroom
             oscillating_template: >-
-              {% if state_attr("fan.bedroom", "oscillating") %}false{% else %}true{% endif %}
+              {% if state_attr("fan.master_bedroom", "oscillating") %}false{% else %}true{% endif %}
         style:
           right: 183px
           bottom: 0
@@ -359,13 +364,13 @@ thing you will need is the background image which can be [downloaded here](/asse
           transform: translate(0%,0%)
           font-size: 16px
           line-height: 16px
-          --paper-item-icon-color_template: '{% if state_attr("fan.bedroom", "oscillating") %}green{% else %}rgb(68, 115, 158){% endif %}'
+          --paper-item-icon-color_template: '{% if state_attr("fan.master_bedroom", "oscillating") %}green{% else %}rgb(68, 115, 158){% endif %}'
 
       # Sensors
 
       - type: state-label
         entity: sensor.dyson_calc_aqi
-        suffix: ' (PM2.5)'
+        suffix: " (PM2.5)"
         style:
           background-color_template: >-
             {% if states("sensor.dyson_calc_aqi")|float > 300 %}
@@ -394,19 +399,20 @@ thing you will need is the background image which can be [downloaded here](/asse
           transform: translate(0%,0%)
 
       - type: state-label
-        entity:  sensor.dyson_particulate_matter_2_5
-        suffix: ' PM2.5'
+        entity: air_quality.master_bedroom
+        attribute: particulate_matter_2_5
+        suffix: " PM2.5"
         style:
           background-color_template: >-
-            {% if states("sensor.dyson_particulate_matter_2_5")|float > 250 %}
+            {% if state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float > 250 %}
             #B71C1C
-            {% elif states("sensor.dyson_particulate_matter_2_5")|float > 150 %}
+            {% elif state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float > 150 %}
             #9C27B0
-            {% elif states("sensor.dyson_particulate_matter_2_5")|float > 70 %}
+            {% elif state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float > 70 %}
             #E53935
-            {% elif states("sensor.dyson_particulate_matter_2_5")|float > 53 %}
+            {% elif state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float > 53 %}
             #FB8C00
-            {% elif states("sensor.dyson_particulate_matter_2_5")|float > 35 %}
+            {% elif state_attr("air_quality.master_bedroom", "particulate_matter_2_5")|float > 35 %}
             #FFC107
             {% else %}
             #4CAF50
@@ -424,19 +430,20 @@ thing you will need is the background image which can be [downloaded here](/asse
           transform: translate(0%,0%)
 
       - type: state-label
-        entity:  sensor.dyson_particulate_matter_10
-        suffix: ' PM10'
+        entity: air_quality.master_bedroom
+        attribute: particulate_matter_10
+        suffix: " PM10"
         style:
           background-color_template: >-
-            {% if states("sensor.dyson_particulate_matter_10")|float > 420 %}
+            {% if state_attr("air_quality.master_bedroom", "particulate_matter_10")|float > 420 %}
             #B71C1C
-            {% elif states("sensor.dyson_particulate_matter_10")|float > 350 %}
+            {% elif state_attr("air_quality.master_bedroom", "particulate_matter_10")|float > 350 %}
             #9C27B0
-            {% elif states("sensor.dyson_particulate_matter_10")|float > 100 %}
+            {% elif state_attr("air_quality.master_bedroom", "particulate_matter_10")|float > 100 %}
             #E53935
-            {% elif states("sensor.dyson_particulate_matter_10")|float > 75 %}
+            {% elif state_attr("air_quality.master_bedroom", "particulate_matter_10")|float > 75 %}
             #FB8C00
-            {% elif states("sensor.dyson_particulate_matter_10")|float > 50 %}
+            {% elif state_attr("air_quality.master_bedroom", "particulate_matter_10")|float > 50 %}
             #FFC107
             {% else %}
             #4CAF50
@@ -454,14 +461,16 @@ thing you will need is the background image which can be [downloaded here](/asse
           transform: translate(0%,0%)
 
       - type: state-label
-        entity: sensor.dyson_nitrogen_dioxide
+        entity: air_quality.master_bedroom
+        attribute: nitrogen_dioxide
+        suffix: " NO2"
         style:
           background-color_template: >-
-            {% if states("sensor.dyson_nitrogen_dioxide")|float > 8 %}
+            {% if state_attr("air_quality.master_bedroom", "nitrogen_dioxide")|float > 8 %}
             #E53935
-            {% elif states("sensor.dyson_nitrogen_dioxide")|float > 6 %}
+            {% elif state_attr("air_quality.master_bedroom", "nitrogen_dioxide")|float > 6 %}
             #FB8C00
-            {% elif states("sensor.dyson_nitrogen_dioxide")|float > 3 %}
+            {% elif state_attr("air_quality.master_bedroom", "nitrogen_dioxide")|float > 3 %}
             #FFC107
             {% else %}
             #4CAF50
@@ -479,14 +488,16 @@ thing you will need is the background image which can be [downloaded here](/asse
           transform: translate(0%,0%)
 
       - type: state-label
-        entity: sensor.dyson_volatile_organic_compounds
+        entity: air_quality.master_bedroom
+        attribute: volatile_organic_compounds
+        suffix: " VOC"
         style:
           background-color_template: >-
-            {% if states("sensor.dyson_volatile_organic_compounds")|float > 8 %}
+            {% if state_attr("air_quality.master_bedroom", "volatile_organic_compounds")|float > 8 %}
             #E53935
-            {% elif states("sensor.dyson_volatile_organic_compounds")|float > 6 %}
+            {% elif state_attr("air_quality.master_bedroom", "volatile_organic_compounds")|float > 6 %}
             #FB8C00
-            {% elif states("sensor.dyson_volatile_organic_compounds")|float > 3 %}
+            {% elif state_attr("air_quality.master_bedroom", "volatile_organic_compounds")|float > 3 %}
             #FFC107
             {% else %}
             #4CAF50
@@ -504,7 +515,7 @@ thing you will need is the background image which can be [downloaded here](/asse
           transform: translate(0%,0%)
 
       - type: state-icon
-        entity:  sensor.bedroom_humidity_dyson
+        entity: sensor.master_bedroom_humidity_dyson
         style:
           top: 2%
           right: 0px
@@ -516,7 +527,7 @@ thing you will need is the background image which can be [downloaded here](/asse
           border-bottom-left-radius: 7px
 
       - type: state-label
-        entity:  sensor.bedroom_humidity_dyson
+        entity: sensor.master_bedroom_humidity_dyson
         style:
           top: 2%
           right: 5%
@@ -526,7 +537,7 @@ thing you will need is the background image which can be [downloaded here](/asse
       # Temperature and Humidity
 
       - type: state-icon
-        entity:  sensor.bedroom_temperature_dyson
+        entity: sensor.master_bedroom_temperature_dyson
         style:
           top: 16%
           right: 0px
@@ -538,7 +549,7 @@ thing you will need is the background image which can be [downloaded here](/asse
           border-bottom-left-radius: 7px
 
       - type: state-label
-        entity:  sensor.bedroom_temperature_dyson
+        entity: sensor.master_bedroom_temperature_dyson
         style:
           top: 16%
           right: 3%
@@ -548,7 +559,7 @@ thing you will need is the background image which can be [downloaded here](/asse
       # Filters
 
       - type: custom:circle-sensor-card
-        entity: sensor.dyson_carbon_filter
+        entity: sensor.master_bedroom_carbon_filter_life
         name: Carbon Filter
         fill: rgba(0, 0, 0, 0.7)
         style:
