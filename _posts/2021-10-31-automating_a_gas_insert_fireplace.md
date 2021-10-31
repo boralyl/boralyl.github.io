@@ -30,7 +30,7 @@ be on when I am heading to bed, I tend to forget the remote is still on and cont
 the fireplace.
 
 So my main goal was to be able to write an automation to automatically turn the fireplace
-off at a certain hour if it was on.
+off at a certain hour, if it was on.
 
 ## Integrating with Home Assistant
 
@@ -105,14 +105,14 @@ steps required to configure these commands in the Bond Home app.
 ## Automations
 
 As of writing, I have 3 primary automations for the fireplace. All of these were created
-in Node-Red, but could also easily be down as a normal Home Assistant automation. Since
+in Node-Red, but could also easily be done as a normal Home Assistant automation. Since
 I already have 99% of my automations in Node-Red I added these there too.
 
 ### Smart temperature mode
 
 This automation replicates the functionality of the Proflame II Transmitter remote. A
 target temperature is set and the fireplace will turn on until it reaches that temperature.
-When the temperature in the room drops below the target it will turn on once again. I already
+When the temperature in the room drops below the target it will turn on, otherwise it will turn off. I already
 had a temperature sensor in the room with the fireplace, so I used that entity to probe
 the temperature of the room.
 
@@ -138,7 +138,7 @@ current temperature to the specified target temperature.
 ### Auto off
 
 This one is very staright forward, I just want to ensure that the fireplace gets turned
-off at a specific time every night. This just uses an inject node to specify a time
+off at a specific time every night. This just uses an inject node to specify a time and
 then runs the service call to switch off the fireplace.
 
 [![Auto off automation](/assets/images/0021_auto_off.png)](/assets/images/0021_auto_off.png)
@@ -150,7 +150,7 @@ then runs the service call to switch off the fireplace.
 The Proflame 2 transmitter remote does not expose a sleep timer function, so I built one
 into Home Assistant. This automation uses 2 Home Assistant helpers.
 
-1. A number helper that allows the number of hours (in half hour increments) to set the
+1. A number helper that allows the number of hours (in half hour increments) to be specified to set the
    sleep timer.
 2. A timer helper that will handle starting/restarting/finishing based on the number
    configured above.
