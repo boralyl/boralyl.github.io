@@ -1,0 +1,63 @@
+[
+  {
+    "id": "339c3cb25869f6c7",
+    "type": "inject",
+    "z": "638aa4565f963e7b",
+    "name": "Every day at 10:45PM",
+    "props": [
+      {
+        "p": "payload"
+      },
+      {
+        "p": "topic",
+        "vt": "str"
+      }
+    ],
+    "repeat": "",
+    "crontab": "45 22 * * *",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
+    "payloadType": "date",
+    "x": 150,
+    "y": 780,
+    "wires": [
+      [
+        "12f51ffec22e585f"
+      ]
+    ]
+  },
+  {
+    "id": "12f51ffec22e585f",
+    "type": "api-call-service",
+    "z": "638aa4565f963e7b",
+    "name": "Turn off fireplace",
+    "server": "",
+    "version": 3,
+    "debugenabled": false,
+    "service_domain": "input_boolean",
+    "service": "turn_off",
+    "entityId": "input_boolean.enable_fireplace",
+    "data": "",
+    "dataType": "jsonata",
+    "mergecontext": "",
+    "mustacheAltTags": false,
+    "outputProperties": [],
+    "queue": "none",
+    "x": 410,
+    "y": 780,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "53ee314df61d7b4e",
+    "type": "comment",
+    "z": "638aa4565f963e7b",
+    "name": "Turn off everyday at 10:45PM",
+    "info": "",
+    "x": 160,
+    "y": 720,
+    "wires": []
+  }
+]

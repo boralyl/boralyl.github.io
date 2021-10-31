@@ -34,3 +34,7 @@ $ bundle exec jekyll serve --incremental --drafts --watch --future
 $ bundle update
 ```
 ````
+
+## Scrubbing node-red exported flows
+
+[Scrubber](https://zachowj.github.io/node-red-contrib-home-assistant-websocket/scrubber/)
