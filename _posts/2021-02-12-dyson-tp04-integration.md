@@ -140,31 +140,31 @@ sensor:
     sensors:
       dyson_aqi:
         friendly_name: "Dyson TP-04 Air Quality Index"
-        value_template: "{{ state_attr('air_quality.bedroom', 'air_quality_index') }}"
+        value_template: {% raw %}"{{ state_attr('air_quality.bedroom', 'air_quality_index') }}"{% endraw %}
         unit_of_measurement: AQI
         unique_id: dyson_tp_04_aqi
 
       dyson_particulate_matter_2_5:
         friendly_name: "Dyson TP-04 PM2.5"
-        value_template: "{{ state_attr('air_quality.bedroom', 'particulate_matter_2_5') }}"
+        value_template: {% raw %}"{{ state_attr('air_quality.bedroom', 'particulate_matter_2_5') }}"{% endraw %}
         unit_of_measurement: "µg/m³"
         unique_id: dyson_tp_04_pm2_5
 
       dyson_particulate_matter_10:
         friendly_name: "Dyson TP-04 PM10"
-        value_template: "{{ state_attr('air_quality.bedroom', 'particulate_matter_10') }}"
+        value_template: {% raw %}"{{ state_attr('air_quality.bedroom', 'particulate_matter_10') }}"{% endraw %}
         unit_of_measurement: "µg/m³"
         unique_id: dyson_tp_04_pm_10
 
       dyson_volatile_organic_compounds:
         friendly_name: "Dyson TP-04 Volatile Organic Compounds"
-        value_template: "{{ state_attr('air_quality.bedroom', 'volatile_organic_compounds') }}"
+        value_template: {% raw %}"{{ state_attr('air_quality.bedroom', 'volatile_organic_compounds') }}"{% endraw %}
         unit_of_measurement: "VOC Scale"
         unique_id: dyson_tp_04_voc
 
       dyson_nitrogen_dioxide:
         friendly_name: "Dyson TP-04 Nitrogen Dioxide"
-        value_template: "{{ state_attr('air_quality.bedroom', 'nitrogen_dioxide') }}"
+        value_template: {% raw %}"{{ state_attr('air_quality.bedroom', 'nitrogen_dioxide') }}"{% endraw %}
         unit_of_measurement: NO2 Scale
         unique_id: dyson_tp_04_no2
 ```
