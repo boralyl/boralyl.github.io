@@ -49,4 +49,4 @@ I went ahead and removed the quotes and re-ran the app. Sure enough the map load
 no issue. So hopefully this helps someone else out there that makes this simple mistake,
 as the error logged by the SDK didn't give any hint that the quotes were the problem.
 
-_TLDR_: Don't wrap your values in your `local.properties` in quoutes.
+_TLDR_: Don't wrap your values in your `local.properties` in quotes.
