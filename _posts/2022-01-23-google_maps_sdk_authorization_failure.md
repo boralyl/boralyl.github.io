@@ -51,5 +51,5 @@ as the error logged by the SDK didn't give any hint that the quotes were the pro
 
 _TLDR_: Don't wrap your values in your `local.properties` in quotes.
 
-**UPDATE 2022-02-15:** It looks like I'm not the only one who has run into this problem: https://github.com/google/secrets-gradle-plugin/issues/46
+**UPDATE 2022-02-15:** It looks like I'm not the only one who has run into [this problem](https://github.com/google/secrets-gradle-plugin/issues/46).
 Quotes will now automatically be removed in [version 2.0.1](https://github.com/google/secrets-gradle-plugin/releases/tag/v2.0.1).
