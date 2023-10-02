@@ -42,7 +42,7 @@ since 2019.  Over the course of 4 days I screened a total of 23 films and TV sho
 
 ## My Personal Top 5
 
-There really were not any bad films I watched over the 4 days but my top 5 films I saw (in no particular order) were:
+There really were not any bad films I watched, but my top 5 films I saw (in no particular order) were:
 
 * [Property](https://www.imdb.com/title/tt23061176/)
 > A gang of disenfranchised farmhands traps a traumatized woman in her armored car in Daniel Bandeira’s Brazilian take on the home invasion.
