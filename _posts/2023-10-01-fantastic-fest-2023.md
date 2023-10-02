@@ -14,7 +14,7 @@ header:
 ---
 
 [Fantastic Fest](https://fantasticfest.com/) is the largest genre film festival in the US showing horror, fantasy, sci-fi and action films. This year was my first time back
-since 2019.  Over the course of 4 days I screened a total of 15 films and TV shows.  There were so many great films I wasn't able to see but those that I did included:
+since 2019.  Over the course of 4 days I screened a total of 23 films and TV shows.  There were so many great films I wasn't able to see but those that I did included:
 * [30 Coins (Season 2, Episodes 1 & 2)](https://www.imdb.com/title/tt9764386/)
 * [In My Mother's Skin](https://www.imdb.com/title/tt20413870/)
 * [The Last Video Store](https://www.imdb.com/title/tt17423262/)
