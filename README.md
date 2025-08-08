@@ -33,7 +33,6 @@ $ bundle exec jekyll serve --incremental --drafts --watch --future
 ```bash
 $ bundle update
 ```
-````
 
 ## Scrubbing node-red exported flows
 
